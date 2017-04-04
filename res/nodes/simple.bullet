@@ -1,0 +1,17 @@
+{
+	"id":"Simple_Bullet",
+	"width": 10,
+	"height": 10,
+	"speed": -5,
+    "default":"Simple_Bullet_Idle",
+    "rate": 0.3,
+    "max":  15,
+    "damage":6,
+	"animation":
+	[{
+		"id": "Simple_Bullet_Idle",
+		"images": ["bullet_0.png"],
+		"speed": 0,
+		"loop": "False"
+	}]
+}

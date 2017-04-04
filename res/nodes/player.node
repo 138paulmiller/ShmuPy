@@ -1,0 +1,36 @@
+{
+	"id":"Player",
+	"width": 50,
+	"height": 50,
+	"xspeed": 3,
+	"yspeed": 3,
+    "default":"Player_Idle",
+    "bullet_system":"simple",
+	"animation":
+	[{
+		"id": "Player_Idle",
+		"images": ["acqua_0.png", "acqua_1.png"],
+		"speed": 0.15,
+		"loop": "True"
+	},
+	{
+		"id": "Player_Damage",
+		"images": ["acqua_1.png", "acqua_2.png"],
+		"speed": 0.4,
+		"loop": "False"
+	}],
+	"children":
+	[{
+	    "id": "helper1",
+	    "file_id":"helper",
+	    "follow":"true",
+	    "follow_dist":[40,40]
+	},
+	{
+	    "id": "helper2",
+	    "file_id":"helper",
+	    "follow":"true",
+	    "follow_dist":[20,20]
+	}]
+}
+

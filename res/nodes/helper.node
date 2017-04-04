@@ -1,0 +1,18 @@
+{
+    "id":"Helper",
+    "health":1,
+    "width": 20,
+    "height": 20,
+    "xspeed": 2,
+	"yspeed": 2,
+    "default":"Helper_Idle",
+    "bullet_system":"helper",
+    "duplicate":"true",
+	"animation":
+	[{
+		"id": "Helper_Idle",
+		"images": ["acqua_0.png", "acqua_1.png"],
+		"speed": 0.15,
+		"loop": "True"
+	}]
+}

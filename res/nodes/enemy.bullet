@@ -1,0 +1,18 @@
+{
+	"id":"Enemy_Bullet",
+	"width": 10,
+	"height": 10,
+	"speed": 6,
+    "default":"Enemy_Bullet_Idle",
+    "rate": 0.2,
+    "max":  20,
+    "damage":3,
+    "bound":"True",
+	"animation":
+	[{
+		"id": "Enemy_Bullet_Idle",
+		"images": ["bullet_1.png"],
+		"speed": 0,
+		"loop": "False"
+	}]
+}
