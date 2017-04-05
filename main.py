@@ -110,7 +110,7 @@ def run():
         for e in enemies:
             if e.is_alive():
                 e.draw(main_window)
-                y = e.get_pos()[1]+e.get_size()[1]
+                y = e.get_pos()[1]
                 if y < main_window.height:
                     if y > 0:
                         e.show()
@@ -125,10 +125,12 @@ def run():
         for e in remove:
             if e in enemies:
                 enemies.remove(e)
-
-        root.draw(main_window)
-        root.update()  # update inputs
-        main_window.update()
+        if root.is_alive():
+            root.draw(main_window)
+            root.update()  # update inputs
+            main_window.update()
+        else:
+            run()
     main_window.close()
 
 
@@ -143,7 +145,6 @@ def handle_collision(node, other):
                 # kill is no health
                 if node.health <= 0:
                     node.kill()
-
                 # if node has a callback call it
                 if node.on_collision:
                     node.on_collision(node, other)

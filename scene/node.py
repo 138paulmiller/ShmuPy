@@ -27,7 +27,7 @@ class Node(graphics.sprite.Sprite):
         self.parent = parent
         self.children = {}
         self.is_duplicate = None
-        self.collidable = True
+        self.collidable = False
         self.on_collision = None
         self.follow = False  # follow parent or not
         self.follow_dist = [0, 0]
@@ -78,6 +78,9 @@ class Node(graphics.sprite.Sprite):
 
     def is_alive(self):
         return self.alive
+
+    def set_collidable(self, collide):
+        self.collidable = collide
 
     def is_collidable(self):
         return self.collidable
@@ -177,8 +180,7 @@ class Node(graphics.sprite.Sprite):
                 child.draw(window)
 
 
-def is_collision(other, node):
-
+def is_collision(node, other):
     return is_collision_rect(node.get_rect(), other.get_rect())
 
 
@@ -230,6 +232,8 @@ def load(node_file):
             node.set_health(data['health'])
         if 'damage' in data:
             node.set_damage(data['damage'])
+        if 'collide' in data:
+            node.set_collidable(data['collide'].lower() in ('true', '1', 'yes'))
         # parse animations
         if 'animation' in data:
             for anim_data in data['animation']:
