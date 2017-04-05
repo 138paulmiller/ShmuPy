@@ -80,6 +80,8 @@ def load(bullet_file):
                     bullet.set_is_bound(data['bound'].lower() in ('true', '1', 'yes'))
                 if 'health' in data:
                     bullet.set_health(data['health'])
+                else:
+                    bullet.set_health(1) # bullets die instantly default
                 if 'damage' in data:
                     bullet.set_damage(data['damage'])
                 bullet_system.source_bullet = bullet

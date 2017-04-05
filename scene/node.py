@@ -28,6 +28,7 @@ class Node(graphics.sprite.Sprite):
         self.children = {}
         self.is_duplicate = None
         self.collidable = True
+        self.on_collision = None
         self.follow = False  # follow parent or not
         self.follow_dist = [0, 0]
         self.alive = True
@@ -40,7 +41,7 @@ class Node(graphics.sprite.Sprite):
         node.flip = sprite.flip
         node.velocity = sprite.velocity
         node.health = sprite.health
-        node.damage =  self.damage
+        node.damage = sprite.damage
         node.speed = sprite.speed
         node.on_update = sprite.on_update
         node.on_draw = sprite.on_draw
@@ -56,7 +57,10 @@ class Node(graphics.sprite.Sprite):
         node.is_duplicate = self.is_duplicate
         node.follow = self.follow
         node.follow_dist = self.follow_dist
-        node.collidable = True
+        node.collidable = self.collidable
+        node.on_collision = self.on_collision
+        node.bullet_system = self.bullet_system
+
         node.alive = True
         memo[self] = node
         return node
@@ -64,12 +68,20 @@ class Node(graphics.sprite.Sprite):
     def set_is_duplicate(self, is_duplicate):
         self.is_duplicate = is_duplicate
 
+    def set_on_collision(self, collision_callback):
+        self.on_collision = collision_callback
+
     def kill(self):
         self.alive = False
+
+    def birth(self):
+        self.alive = True
 
     def is_alive(self):
         return self.alive
 
+    def is_collidable(self):
+        return self.collidable
 
     def get_is_duplicate(self):
         return self.is_duplicate
@@ -164,43 +176,6 @@ class Node(graphics.sprite.Sprite):
             self.bullet_system.draw(window)
         for child in self.children.values():
                 child.draw(window)
-
-    def attack(self, enemy):
-        collision = False
-        if not enemy.is_hidden() and self.collidable:
-            if is_collision(enemy, self):
-                #remove.append(enemy)
-                collision = True
-                enemy.health -= self.damage
-                if enemy.health <= 0:
-                    enemy.kill()
-                self.health -= enemy.damage
-            for child in enemy.get_children():
-                if self.attack(child):
-                    child.health -= self.damage
-                    if child.health <= 0:
-                        child.kill()
-
-        if self.bullet_system:
-            dead_bullets = []
-            bullets = self.bullet_system.get_bullets()
-            for bullet in bullets:
-                if bullet.attack(enemy):
-                    dead_bullets.append(bullet)
-                    collision = True
-                    enemy.health -= bullet.damage
-                    if enemy.health <= 0:
-                        enemy.kill()
-            for r in dead_bullets:
-                bullets.remove(r)
-            self.bullet_system.bullets = bullets
-        for child in self.get_children():
-            if child.attack(enemy):
-                enemy.health -= child.damage
-                if enemy.health <= 0:
-                    enemy.kill()
-
-        return collision
 
 
 def is_collision(other, node):

@@ -10,25 +10,35 @@ def run():
       Python based Shoot Em Up Game Engine
       Copyright Paul Miller 2017"""
     # creates a window instance
-    main_window = graphics.window.Window(580, 640)
+    main_window = graphics.window.Window(580, 720)
     running = True
     # load all images from img
     graphics.images = graphics.image_loader.load_images("res/img/")
-    world = []  # all nodes
     root = scene.node.load("player.node")
     root.set_pos((main_window.width / 2, main_window.height / 2))
-    world.append(root)
+
     for child in root.get_children():
         child.hide()
-        world.append(child)
+        child.kill()
         child.set_pos((root.get_pos()[0], root.get_pos()[1]))
 
+    def on_enemy_collision(node, other):
+            print "Explosion"
+
     enemies = []
-    for i in range(100):
+    for i in range(500):
         enemies.append(scene.node.load("enemy_skull.node"))
-        enemies[-1].set_pos((random.randint(0, main_window.width), -100*random.randint(1,100)))
+        enemies[-1].set_pos((random.randint(0, main_window.width), -100*random.randint(1,1000)))
         enemies[-1].hide()
-        world.append(enemies[-1])
+        enemies[-1].set_on_collision(on_enemy_collision)
+
+    def on_player_collision(node, other):
+        if node == root:
+            print"Player:", node.get_health()
+            node.set_animation("Player_Damage")
+            if not node.is_alive():
+                print "Game Over"
+                run()
 
     def on_player_draw(window):
         """
@@ -60,8 +70,7 @@ def run():
         if root.get_velocity()[1] != 0:
             root.set_velocity((0, 0))
 
-
-
+    root.set_on_collision(on_player_collision)
     root.set_on_draw(on_player_draw)
     root.set_on_update(on_player_update)
 
@@ -73,6 +82,7 @@ def run():
             for helper in root.get_children():
                 if helper.is_hidden():
                     helper.show()
+                    helper.birth()
                     break  # only add one helper at a time
 
 
@@ -97,33 +107,70 @@ def run():
                 e.draw(main_window)
                 y = e.get_pos()[1]+e.get_size()[1]
                 if y < main_window.height:
-                    if y > 0 :
+                    if y > 0:
                         e.show()
                         if abs(e.get_pos()[0]+ e.get_size()[0]/2-root.get_pos()[0]+root.get_size()[0]/2) < 15:
                             e.shoot()
-                        if e.attack(root):
-                            root.set_animation("Player_Damage")
-                            if root.get_health() <= 0:
-                                print "Game Over"
-                                run()
-
+                        handle_collision(root, e)
+                        handle_collision(e, root)
                     e.update()
                 else:
                     remove.append(e)
-            else:
-                remove.append(e)
 
-            if root.attack(e):
-                if e.get_health() <= 0:
-                    e.kill()
         for e in remove:
             if e in enemies:
                 enemies.remove(e)
+
         root.draw(main_window)
         root.update()  # update inputs
         main_window.update()
     main_window.close()
 
+
+def handle_collision(node, other):
+    if node.is_alive() and other.is_alive():
+        if node.is_collidable() and other.is_collidable():
+            # if collision between node and other
+            if scene.node.is_collision(node, other):
+                # take damage to both nodes
+                node.health -= other.damage
+                print node.get_id(), ":", node.get_health(), " hit ", other.get_id(), ":",other.get_health()
+                # kill is no health
+                if node.health <= 0:
+                    node.kill()
+
+                # if node has a callback call it
+                if node.on_collision:
+                    node.on_collision(node, other)
+            # handle collision between other and node.bullets
+            dead_bullets = []
+            for bullet in node.get_bullets():
+                if scene.node.is_collision(bullet, other):
+                    # take damage to both nodes
+                    other.health -= bullet.damage
+                    bullet.health -= other.damage
+                    if other.on_collision:
+                        other.on_collision(other, bullet)
+                    print bullet.get_id(), ":", bullet.get_health(), " hit ", other.get_id(), ":", other.get_health()
+                    # kill is no health
+                    if other.health <= 0:
+                        other.kill()
+                    if bullet.health <= 0:
+                        bullet.kill()
+                if not bullet.is_alive():
+                    dead_bullets.append(bullet)
+            for bullet in dead_bullets:
+                node.get_bullets().remove(bullet)
+            dead_bullets_other = []
+            # handle collision between node and other.children
+            for child_other in other.get_children():
+                handle_collision(child_other, node)
+                if not child_other.is_alive():
+                    child_other.hide()
+            # handle collision between node and other.bullets
+
+    for child in node.get_children():
+        handle_collision(child, other)
 
 if __name__ == '__main__':
     run()
