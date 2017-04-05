@@ -4,7 +4,7 @@
 	"height": 10,
 	"speed": 6,
     "default":"Enemy_Bullet_Idle",
-    "rate": 0.2,
+    "rate": 0.5,
     "max":  20,
     "damage":3,
     "bound":"True",

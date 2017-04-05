@@ -1,11 +1,14 @@
 {
 	"id":"Player",
-	"width": 50,
-	"height": 50,
-	"xspeed": 3,
-	"yspeed": 3,
+	"width": 45,
+	"health":50,
+	"height": 45,
+	"xspeed": 3.5,
+	"yspeed": 3.5,
     "default":"Player_Idle",
     "bullet_system":"simple",
+    "bound":"True",
+    "collide":"True",
 	"animation":
 	[{
 		"id": "Player_Idle",

@@ -1,7 +1,8 @@
 {
 	"id":"Skull",
-	"width": 50,
-	"height": 50,
+	"width": 30,
+	"height": 30,
+	"health":80,
 	"xspeed": 3,
 	"yspeed": 3,
 	"xvelocity":0,
@@ -9,6 +10,7 @@
     "default":"Skull_Idle",
     "bullet_system":"enemy",
     "bound":"True",
+    "collide":"True",
     "damage":10,
 	"animation":
 	[{

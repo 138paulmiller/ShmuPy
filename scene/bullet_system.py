@@ -13,6 +13,13 @@ class BulletSystem(object):
         self.source_bullet = source_bullet
         self.count = 0
 
+    def __deepcopy__(self, memodict={}):
+        other = BulletSystem(self.source_bullet, self.rate, self.max)
+        other.bullets = deepcopy(self.bullets)
+        other.count = self.count
+        memodict[self] = other
+        return other
+
     def get_bullets(self):
         return self.bullets
 

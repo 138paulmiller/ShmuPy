@@ -26,9 +26,10 @@ def run():
             print "Explosion"
 
     enemies = []
+    enemy = scene.node.load("enemy_skull.node")
     for i in range(500):
-        enemies.append(scene.node.load("enemy_skull.node"))
-        enemies[-1].set_pos((random.randint(0, main_window.width), -100*random.randint(1,1000)))
+        enemies.append(deepcopy(enemy))
+        enemies[-1].set_pos((random.randint(0, main_window.width), -100*random.randint(1,500)))
         enemies[-1].hide()
         enemies[-1].set_on_collision(on_enemy_collision)
 
@@ -46,6 +47,7 @@ def run():
         :param window:
             Window the player in drawn on
         """
+        # only move withing window bounds if bound
         dx, dy = root.get_velocity()
         if window.is_key_down('\r'):
             root.shoot()
@@ -57,9 +59,12 @@ def run():
             dy = -1
         if window.is_key_down('s'):
             dy = +1
-        root.set_velocity((dx*root.get_speed()[0], dy*root.get_speed()[1]))
-
-
+        if root.get_is_bound():
+            if root.get_pos()[0]+dx < 0 or root.get_pos()[0]+root.get_size()[0]+dx > window.width:
+                dx = 0
+            if root.get_pos()[1]+dy < 0 or root.get_pos()[1]+root.get_size()[1]+dy > window.height:
+                dy = 0
+        root.set_velocity((dx * root.get_speed()[0], dy * root.get_speed()[1]))
 
     def on_player_update():
         """
@@ -109,7 +114,7 @@ def run():
                 if y < main_window.height:
                     if y > 0:
                         e.show()
-                        if abs(e.get_pos()[0]+ e.get_size()[0]/2-root.get_pos()[0]+root.get_size()[0]/2) < 15:
+                        if abs(e.get_pos()[0]-root.get_pos()[0]) < 15:
                             e.shoot()
                         handle_collision(root, e)
                         handle_collision(e, root)

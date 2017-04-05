@@ -59,8 +59,7 @@ class Node(graphics.sprite.Sprite):
         node.follow_dist = self.follow_dist
         node.collidable = self.collidable
         node.on_collision = self.on_collision
-        node.bullet_system = self.bullet_system
-
+        node.bullet_system = deepcopy(self.bullet_system)
         node.alive = True
         memo[self] = node
         return node
@@ -179,9 +178,12 @@ class Node(graphics.sprite.Sprite):
 
 
 def is_collision(other, node):
-    node_rect = node.get_rect()
+
+    return is_collision_rect(node.get_rect(), other.get_rect())
+
+
+def is_collision_rect(node_rect, other_rect):
     collide = False
-    other_rect = other.get_rect()
     if (node_rect[0][0] < other_rect[0][0] + other_rect[1][0]) and (
                     node_rect[0][0] + node_rect[1][0] > other_rect[0][0]):
         if (node_rect[0][1] < other_rect[0][1] + other_rect[1][1]) and (
