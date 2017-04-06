@@ -9,6 +9,7 @@ class Sprite(object):
         self.flip = [0, 0]
         self.velocity = [0, 0]
         self.health = 100
+        self.start_health = 100
         self.damage =  100
         self.speed = [0, 0]
         self.animations = {}
@@ -24,6 +25,7 @@ class Sprite(object):
         sprite.pos = deepcopy(self.pos)
         sprite.size = deepcopy(self.size)
         sprite.flip = deepcopy(self.flip)
+        sprite.start_health = self.start_health
         sprite.velocity = deepcopy(self.velocity)
         sprite.health = self.health
         sprite.damage =  self.damage
@@ -44,6 +46,9 @@ class Sprite(object):
 
     def set_health(self, health):
         self.health = health
+
+    def set_start_health(self, health):
+        self.start_health = health
 
     def get_damage(self):
         return self.damage

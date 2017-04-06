@@ -85,6 +85,10 @@ def load(bullet_file):
                             print bullet.get_id(), ":Missing Default Animation!!!"
                 if 'bound' in data:
                     bullet.set_is_bound(data['bound'].lower() in ('true', '1', 'yes'))
+                if 'collide' in data:
+                    bullet.set_collidable(data['collide'].lower() in ('true', '1', 'yes'))
+                else:
+                    bullet.set_collidable(True)
                 if 'health' in data:
                     bullet.set_health(data['health'])
                 else:

@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="1add766d-4a08-4230-8e8c-4b111db3a7c5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/graphics/sprite.py" afterPath="$PROJECT_DIR$/graphics/sprite.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/nodes/enemy_skull.node" afterPath="$PROJECT_DIR$/res/nodes/enemy_skull.node" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/nodes/helper.node" afterPath="$PROJECT_DIR$/res/nodes/helper.node" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scene/bullet_system.py" afterPath="$PROJECT_DIR$/scene/bullet_system.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scene/node.py" afterPath="$PROJECT_DIR$/scene/node.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,8 +32,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="132" column="17" lean-forward="false" selection-start-line="132" selection-start-column="17" selection-end-line="132" selection-end-column="17" />
+            <state relative-caret-position="705">
+              <caret line="46" column="72" lean-forward="false" selection-start-line="46" selection-start-column="72" selection-end-line="46" selection-end-column="72" />
               <folding>
                 <element signature="e#1#16#0" expanded="true" />
               </folding>
@@ -37,23 +41,52 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scene/__init__.py">
+      <file leaf-file-name="helper.node" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/nodes/helper.node">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+            <state relative-caret-position="170">
+              <caret line="10" column="21" lean-forward="false" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="helper.bullet" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/nodes/helper.bullet">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="16" lean-forward="true" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/graphics/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
               <folding>
-                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#0#19#0" expanded="true" />
+                <marker date="1491437285199" expanded="true" signature="884:1001" ph="..." />
+                <marker date="1491437285199" expanded="true" signature="889:949" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1491437285199" expanded="true" signature="1017:1106" ph="..." />
+                <marker date="1491437285199" expanded="true" signature="1022:1064" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1491437285199" expanded="true" signature="1163:1484" ph="..." />
+                <marker date="1491437285199" expanded="true" signature="1168:1425" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1491437285199" expanded="true" signature="1536:1861" ph="..." />
+                <marker date="1491437285199" expanded="true" signature="1541:1797" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+                <marker date="1491437285199" expanded="true" signature="1899:2069" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="enemy.bullet" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/nodes/enemy.bullet">
+      <file leaf-file-name="player.node" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/nodes/player.node">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="24" lean-forward="false" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
+            <state relative-caret-position="442">
+              <caret line="26" column="8" lean-forward="false" selection-start-line="26" selection-start-column="8" selection-end-line="29" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -62,18 +95,8 @@
       <file leaf-file-name="enemy_skull.node" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/nodes/enemy_skull.node">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="12" lean-forward="false" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="player.node" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/nodes/player.node">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="6" lean-forward="false" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+            <state relative-caret-position="187">
+              <caret line="11" column="18" lean-forward="false" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -82,8 +105,8 @@
       <file leaf-file-name="bullet_system.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scene/bullet_system.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="18" column="32" lean-forward="false" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
+            <state relative-caret-position="1079">
+              <caret line="90" column="47" lean-forward="false" selection-start-line="90" selection-start-column="47" selection-end-line="90" selection-end-column="47" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -101,21 +124,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="helper.node" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/nodes/helper.node">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="14" lean-forward="false" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="node.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scene/node.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2363">
-              <caret line="182" column="28" lean-forward="false" selection-start-line="182" selection-start-column="28" selection-end-line="182" selection-end-column="28" />
+            <state relative-caret-position="2822">
+              <caret line="232" column="39" lean-forward="false" selection-start-line="232" selection-start-column="39" selection-end-line="232" selection-end-column="39" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -126,8 +139,8 @@
       <file leaf-file-name="sprite.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/graphics/sprite.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="73" column="106" lean-forward="true" selection-start-line="73" selection-start-column="106" selection-end-line="73" selection-end-column="106" />
+            <state relative-caret-position="697">
+              <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -169,20 +182,21 @@
         <option value="$PROJECT_DIR$/graphics/image_loader.py" />
         <option value="$PROJECT_DIR$/res/nodes/bullet.node" />
         <option value="$PROJECT_DIR$/graphics/window.py" />
-        <option value="$PROJECT_DIR$/graphics/__init__.py" />
         <option value="$PROJECT_DIR$/res/nodes/bullet_0.node" />
         <option value="$PROJECT_DIR$/graphics/animation.py" />
-        <option value="$PROJECT_DIR$/res/nodes/helper.bullet" />
-        <option value="$PROJECT_DIR$/res/nodes/helper.node" />
         <option value="$PROJECT_DIR$/res/nodes/simple.bullet" />
-        <option value="$PROJECT_DIR$/graphics/sprite.py" />
         <option value="$PROJECT_DIR$/scene/collision.py" />
         <option value="$PROJECT_DIR$/scene/__init__.py" />
-        <option value="$PROJECT_DIR$/scene/bullet_system.py" />
-        <option value="$PROJECT_DIR$/res/nodes/enemy_skull.node" />
-        <option value="$PROJECT_DIR$/res/nodes/player.node" />
         <option value="$PROJECT_DIR$/res/nodes/enemy.bullet" />
+        <option value="$PROJECT_DIR$/graphics/font.py" />
+        <option value="$PROJECT_DIR$/graphics/__init__.py" />
+        <option value="$PROJECT_DIR$/res/nodes/player.node" />
+        <option value="$PROJECT_DIR$/res/nodes/helper.bullet" />
+        <option value="$PROJECT_DIR$/res/nodes/helper.node" />
+        <option value="$PROJECT_DIR$/scene/bullet_system.py" />
+        <option value="$PROJECT_DIR$/graphics/sprite.py" />
         <option value="$PROJECT_DIR$/scene/node.py" />
+        <option value="$PROJECT_DIR$/res/nodes/enemy_skull.node" />
         <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
@@ -194,10 +208,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="-7" />
+    <option name="width" value="1421" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -526,15 +539,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-7" y="0" width="1421" height="1047" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.123958334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12384342" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32851985" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="right" auto_hide="true" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.6281337" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="1119" y="176" width="772" height="353" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="true" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.6281337" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="1087" y="660" width="772" height="353" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32851985" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -570,19 +583,21 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/graphics/window.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="58" column="25" lean-forward="false" selection-start-line="58" selection-start-column="25" selection-end-line="58" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/graphics/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="7" lean-forward="false" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
           <folding>
-            <element signature="e#0#19#0" expanded="false" />
+            <element signature="e#0#19#0" expanded="true" />
+            <marker date="1491437285199" expanded="true" signature="884:1001" ph="..." />
+            <marker date="1491437285199" expanded="true" signature="889:949" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1491437285199" expanded="true" signature="1017:1106" ph="..." />
+            <marker date="1491437285199" expanded="true" signature="1022:1064" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1491437285199" expanded="true" signature="1163:1484" ph="..." />
+            <marker date="1491437285199" expanded="true" signature="1168:1425" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1491437285199" expanded="true" signature="1536:1861" ph="..." />
+            <marker date="1491437285199" expanded="true" signature="1541:1797" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1491437285199" expanded="true" signature="1899:2069" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
           </folding>
         </state>
       </provider>
@@ -625,7 +640,16 @@
         <state relative-caret-position="646">
           <caret line="38" column="15" lean-forward="false" selection-start-line="38" selection-start-column="15" selection-end-line="38" selection-end-column="15" />
           <folding>
-            <element signature="e#0#19#0" expanded="false" />
+            <element signature="e#0#19#0" expanded="true" />
+            <marker date="1491437285199" expanded="true" signature="884:1001" ph="..." />
+            <marker date="1491437285199" expanded="true" signature="889:949" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1491437285199" expanded="true" signature="1017:1106" ph="..." />
+            <marker date="1491437285199" expanded="true" signature="1022:1064" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1491437285199" expanded="true" signature="1163:1484" ph="..." />
+            <marker date="1491437285199" expanded="true" signature="1168:1425" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1491437285199" expanded="true" signature="1536:1861" ph="..." />
+            <marker date="1491437285199" expanded="true" signature="1541:1797" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1491437285199" expanded="true" signature="1899:2069" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
           </folding>
         </state>
       </provider>
@@ -717,13 +741,6 @@
     <entry file="file://$PROJECT_DIR$/player.py" />
     <entry file="file://$PROJECT_DIR$/window.py" />
     <entry file="file://$PROJECT_DIR$/res/img/bullet/bullet_0.png" />
-    <entry file="file://$PROJECT_DIR$/graphics/window.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="49" lean-forward="false" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python27/Lib/copy.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -731,49 +748,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphics/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-230">
-          <caret line="31" column="24" lean-forward="false" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#19#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/run.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphics/animation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="20" column="36" lean-forward="false" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/nodes/helper.bullet">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphics/image_loader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="38" lean-forward="false" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/nodes/helper.node">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="14" lean-forward="false" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -788,20 +766,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scene/bullet_system.py">
+    <entry file="file://$PROJECT_DIR$/res/nodes/enemy.bullet">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="18" column="32" lean-forward="false" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
+        <state relative-caret-position="17">
+          <caret line="1" column="24" lean-forward="false" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphics/window.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="1" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphics/image_loader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="38" lean-forward="false" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphics/font.py" />
+    <entry file="file://$PROJECT_DIR$/graphics/animation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="20" column="36" lean-forward="false" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/nodes/player.node">
+    <entry file="file://$PROJECT_DIR$/graphics/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="6" lean-forward="false" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+        <state relative-caret-position="493">
+          <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+            <marker date="1491437285199" expanded="true" signature="884:1001" ph="..." />
+            <marker date="1491437285199" expanded="true" signature="889:949" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1491437285199" expanded="true" signature="1017:1106" ph="..." />
+            <marker date="1491437285199" expanded="true" signature="1022:1064" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1491437285199" expanded="true" signature="1163:1484" ph="..." />
+            <marker date="1491437285199" expanded="true" signature="1168:1425" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1491437285199" expanded="true" signature="1536:1861" ph="..." />
+            <marker date="1491437285199" expanded="true" signature="1541:1797" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+            <marker date="1491437285199" expanded="true" signature="1899:2069" ph="&quot;&quot;&quot;...&quot;&quot;&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/nodes/helper.bullet">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="16" lean-forward="true" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -814,44 +834,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/nodes/enemy_skull.node">
+    <entry file="file://$PROJECT_DIR$/scene/bullet_system.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="12" lean-forward="false" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
-          <folding />
+        <state relative-caret-position="1079">
+          <caret line="90" column="47" lean-forward="false" selection-start-line="90" selection-start-column="47" selection-end-line="90" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/graphics/sprite.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="73" column="106" lean-forward="true" selection-start-line="73" selection-start-column="106" selection-end-line="73" selection-end-column="106" />
+        <state relative-caret-position="697">
+          <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/nodes/enemy_skull.node">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="18" lean-forward="false" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scene/node.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2363">
-          <caret line="182" column="28" lean-forward="false" selection-start-line="182" selection-start-column="28" selection-end-line="182" selection-end-column="28" />
+        <state relative-caret-position="2822">
+          <caret line="232" column="39" lean-forward="false" selection-start-line="232" selection-start-column="39" selection-end-line="232" selection-end-column="39" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/nodes/enemy.bullet">
+    <entry file="file://$PROJECT_DIR$/res/nodes/player.node">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="24" lean-forward="false" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
+        <state relative-caret-position="442">
+          <caret line="26" column="8" lean-forward="false" selection-start-line="26" selection-start-column="8" selection-end-line="29" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/nodes/helper.node">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="21" lean-forward="false" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="132" column="17" lean-forward="false" selection-start-line="132" selection-start-column="17" selection-end-line="132" selection-end-column="17" />
+        <state relative-caret-position="705">
+          <caret line="46" column="72" lean-forward="false" selection-start-line="46" selection-start-column="72" selection-end-line="46" selection-end-column="72" />
           <folding>
             <element signature="e#1#16#0" expanded="true" />
           </folding>

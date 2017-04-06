@@ -8,6 +8,7 @@
     "default":"Helper_Idle",
     "bullet_system":"helper",
     "duplicate":"true",
+    "collide":"true",
 	"animation":
 	[{
 		"id": "Helper_Idle",

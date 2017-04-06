@@ -15,11 +15,26 @@ def run():
     # load all images from img
     graphics.images = graphics.image_loader.load_images("res/img/")
     root = scene.node.load("player.node")
+    root.show()
     root.set_pos((main_window.width / 2, main_window.height / 2))
+
+    def on_helper_collision(node, other):
+        if node.get_health() < 0:
+            node.hide()
+            node.set_health(node.start_health)
+            node.kill()
+
+    def on_player_collision(node, other):
+        print"Player:", node.get_health()
+        node.set_animation("Player_Damage")
+        if not node.is_alive():
+            print "Game Over"
+            run()
 
     for child in root.get_children():
         child.hide()
-        child.kill()
+        child.birth()
+        child.set_on_collision(on_helper_collision)
         child.set_pos((root.get_pos()[0], root.get_pos()[1]))
 
     def on_enemy_collision(node, other):
@@ -30,16 +45,11 @@ def run():
     for i in range(500):
         enemies.append(deepcopy(enemy))
         enemies[-1].set_pos((random.randint(0, main_window.width), -100*random.randint(1,500)))
+        enemies[-1].birth()
         enemies[-1].hide()
         enemies[-1].set_on_collision(on_enemy_collision)
 
-    def on_player_collision(node, other):
-        if node == root:
-            print"Player:", node.get_health()
-            node.set_animation("Player_Damage")
-            if not node.is_alive():
-                print "Game Over"
-                run()
+
 
     def on_player_draw(window):
         """
@@ -109,22 +119,22 @@ def run():
         remove = []
         for e in enemies:
             if e.is_alive():
-                e.draw(main_window)
                 y = e.get_pos()[1]
+                e.draw(main_window)
                 if y < main_window.height:
                     if y > 0:
                         e.show()
-                        if abs(e.get_pos()[0]-root.get_pos()[0]) < 15:
+                        if abs(e.get_pos()[0] - root.get_pos()[0]) < 15:
                             e.shoot()
                         handle_collision(root, e)
                         handle_collision(e, root)
-                    e.update()
                 else:
                     remove.append(e)
+                e.update()
+        for r in remove:
+            if r in enemies:
+                enemies.remove(r)
 
-        for e in remove:
-            if e in enemies:
-                enemies.remove(e)
         if root.is_alive():
             root.draw(main_window)
             root.update()  # update inputs
@@ -134,14 +144,15 @@ def run():
     main_window.close()
 
 
+
 def handle_collision(node, other):
-    if node.is_alive() and other.is_alive():
-        if node.is_collidable() and other.is_collidable():
+    if node.is_alive():
+        if node.is_collidable() and not node.is_hidden():
             # if collision between node and other
             if scene.node.is_collision(node, other):
+                print node.get_id(),":",other.get_health(), "--", other.get_id(),":", other.get_health()
                 # take damage to both nodes
                 node.health -= other.damage
-                print node.get_id(), ":", node.get_health(), " hit ", other.get_id(), ":",other.get_health()
                 # kill is no health
                 if node.health <= 0:
                     node.kill()
@@ -151,32 +162,26 @@ def handle_collision(node, other):
             # handle collision between other and node.bullets
             dead_bullets = []
             for bullet in node.get_bullets():
-                if scene.node.is_collision(bullet, other):
-                    # take damage to both nodes
-                    other.health -= bullet.damage
-                    bullet.health -= other.damage
-                    if other.on_collision:
-                        other.on_collision(other, bullet)
-                    print bullet.get_id(), ":", bullet.get_health(), " hit ", other.get_id(), ":", other.get_health()
-                    # kill is no health
-                    if other.health <= 0:
-                        other.kill()
-                    if bullet.health <= 0:
-                        bullet.kill()
+                handle_collision(bullet, other)
+                # take damage to both nodes
+                # kill is no health
+                if other.health <= 0:
+                    other.kill()
                 if not bullet.is_alive():
                     dead_bullets.append(bullet)
             for bullet in dead_bullets:
                 node.get_bullets().remove(bullet)
             dead_bullets_other = []
             # handle collision between node and other.children
-            for child_other in other.get_children():
-                handle_collision(child_other, node)
-                if not child_other.is_alive():
-                    child_other.hide()
+
             # handle collision between node and other.bullets
-
-    for child in node.get_children():
-        handle_collision(child, other)
-
+            for child_other in other.get_children():
+                handle_collision(node, child_other)
+                if child_other.health <= 0:
+                    child_other.kill()
+        for child in node.get_children():
+            handle_collision(child, other)
+            if other.health <= 0:
+                other.kill()
 if __name__ == '__main__':
     run()

@@ -9,7 +9,7 @@
 	"yvelocity":3,
     "default":"Skull_Idle",
     "bullet_system":"enemy",
-    "bound":"True",
+    "bound":"false",
     "collide":"True",
     "damage":10,
 	"animation":
@@ -18,5 +18,13 @@
 		"images": ["skull_0.png", "skull_1.png"],
 		"speed": 0.15,
 		"loop": "True"
+	}],
+	"children":
+	[{
+	    "id": "helper1",
+	    "file_id":"helper",
+	    "follow":"true",
+	    "follow_dist":[40,40]
+
 	}]
 }

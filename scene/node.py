@@ -60,7 +60,7 @@ class Node(graphics.sprite.Sprite):
         node.collidable = self.collidable
         node.on_collision = self.on_collision
         node.bullet_system = deepcopy(self.bullet_system)
-        node.alive = True
+        node.alive = self.alive
         memo[self] = node
         return node
 
@@ -230,6 +230,8 @@ def load(node_file):
             node.set_is_bound(data['bound'].lower() in ('true', '1', 'yes'))
         if 'health' in data:
             node.set_health(data['health'])
+            node.set_start_health(node.get_health())
+
         if 'damage' in data:
             node.set_damage(data['damage'])
         if 'collide' in data:
