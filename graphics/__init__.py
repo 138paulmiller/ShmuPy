@@ -30,12 +30,18 @@ pygame.init()                   # Initialize pygame
 clock = pygame.time.Clock()     # Clock object ised to stabalize framerate
 prev_time = 0
 images = {}                     # Images loaded from the image_loader
-
-
+font = pygame.font.SysFont('monospace bold', 42)
+font_color = (250, 200, 3)
 """
 Graphics Utility Functions
     Used by the other modules in package to simplify rendering
 """
+
+
+def draw_font(display, text, font, color, pos):
+    display.blit(font.render(text, 1, color), pos)
+
+
 def get_display((width, height)):
     """
     return:

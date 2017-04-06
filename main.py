@@ -81,13 +81,18 @@ def run():
         # appliy velocity
         level.player.set_velocity((dx * level.player.get_speed()[0], dy * level.player.get_speed()[1]))
         level.draw(main_window)
+        # draw ui stuff
+        graphics.draw_font(main_window.display, 'Health:{:3}'.format(level.player.get_health()),
+                           graphics.font, graphics.font_color, (0, 0))
         if level.player.is_alive():
             # update velocity
             if level.player.get_velocity()[0] != 0:
                 level.player.set_velocity((0, level.player.get_velocity()[1]))
             if level.player.get_velocity()[1] != 0:
                 level.player.set_velocity((level.player.get_velocity()[0], 0))
+            # update window
             main_window.update()
+
         else:
             run()
     main_window.close()
