@@ -11,182 +11,105 @@ def run():
       Copyright Paul Miller 2017"""
     # creates a window instance
     main_window = graphics.window.Window(580, 720)
-    running = True
     # load all images from img
+    level = scene.level.Level()
+    # load all images used
     graphics.images = graphics.image_loader.load_images("res/img/")
+    # load root (player)
     root = scene.node.load("player.node")
     root.show()
     root.set_pos((main_window.width / 2, main_window.height / 2))
-
-    def on_helper_collision(node, other):
-        if node.get_health() < 0:
-            node.hide()
-            node.set_health(node.start_health)
-            node.kill()
-
-    def on_player_collision(node, other):
-        print"Player:", node.get_health()
-        node.set_animation("Player_Damage")
-        if not node.is_alive():
-            print "Game Over"
-            run()
-
+    root.set_on_collision(on_player_collision)
     for child in root.get_children():
         child.hide()
         child.birth()
         child.set_on_collision(on_helper_collision)
         child.set_pos((root.get_pos()[0], root.get_pos()[1]))
+    level.set_player(root)
 
-    def on_enemy_collision(node, other):
-            print "Explosion"
-
-    enemies = []
+    # load enemies
     enemy = scene.node.load("enemy_skull.node")
     for i in range(500):
-        enemies.append(deepcopy(enemy))
-        enemies[-1].set_pos((random.randint(0, main_window.width), -100*random.randint(1,500)))
-        enemies[-1].birth()
-        enemies[-1].hide()
-        enemies[-1].set_on_collision(on_enemy_collision)
+        level.add_enemy(deepcopy(enemy))
+        level.enemies[-1].set_pos((random.randint(0, main_window.width), -100 * random.randint(1, 500)))
+        level.enemies[-1].birth()
+        level.enemies[-1].hide()
+        level.enemies[-1].set_on_collision(on_enemy_collision)
 
 
-
-    def on_player_draw(window):
-        """
-        Called everytime player nodes draw is called
-        :param window:
-            Window the player in drawn on
-        """
-        # only move withing window bounds if bound
-        dx, dy = root.get_velocity()
-        if window.is_key_down('\r'):
-            root.shoot()
-        if window.is_key_down('a'):
-            dx = -1
-        if window.is_key_down('d'):
-            dx = 1
-        if window.is_key_down('w'):
-            dy = -1
-        if window.is_key_down('s'):
-            dy = +1
-        if root.get_is_bound():
-            if root.get_pos()[0]+dx < 0 or root.get_pos()[0]+root.get_size()[0]+dx > window.width:
-                dx = 0
-            if root.get_pos()[1]+dy < 0 or root.get_pos()[1]+root.get_size()[1]+dy > window.height:
-                dy = 0
-        root.set_velocity((dx * root.get_speed()[0], dy * root.get_speed()[1]))
-
-    def on_player_update():
-        """
-        Called everytime player nodes update is called
-        """
-        if root.get_velocity()[0] != 0:
-            root.set_velocity((0, root.get_velocity()[1]))
-        if root.get_velocity()[1] != 0:
-            root.set_velocity((0, 0))
-
-    root.set_on_collision(on_player_collision)
-    root.set_on_draw(on_player_draw)
-    root.set_on_update(on_player_update)
-
-
-
-
+    # window keyboard callbacks
     def on_key_down(key):
-        if key == ord('e'):
+        if key == ord('e'): ## DEBUGGING
             for helper in root.get_children():
                 if helper.is_hidden():
                     helper.show()
                     helper.birth()
                     break  # only add one helper at a time
 
-
     def on_key_up(key):
         pass
-
+    # set window callback
     main_window.set_on_key_down(on_key_down)
     main_window.set_on_key_up(on_key_up)
+
     while not main_window.is_quit():
         timedelta = graphics.clock.tick(60)
-
         main_window.clear((0, 10, 30))
-        if main_window.is_key_down('q'):
-            root.set_animation("Player_Damage")
+        ## Debug zoom
         if main_window.is_key_down('z'):
             root.set_size((root.get_size()[0]+1, root.get_size()[1]+1))
         if main_window.is_key_down('x'):
             root.set_size((root.get_size()[0] - 1, root.get_size()[1] - 1))
-        remove = []
-        for e in enemies:
-            if e.is_alive():
-                y = e.get_pos()[1]
-                e.draw(main_window)
-                if y < main_window.height:
-                    if y > 0:
-                        e.show()
-                        if abs(e.get_pos()[0] - root.get_pos()[0]) < 15:
-                            e.shoot()
-                        handle_collision(root, e)
-                else:
-                    remove.append(e)
-                e.update()
-        for r in remove:
-            if r in enemies:
-                enemies.remove(r)
 
-        if root.is_alive():
-            root.draw(main_window)
-            root.update()  # update inputs
+        # get players dx dy and set based on keys down
+        dx, dy = level.player.get_velocity()
+        if main_window.is_key_down('\r'):
+            level.player.shoot()
+        if main_window.is_key_down('a'):
+            dx = -1
+        if main_window.is_key_down('d'):
+            dx = 1
+        if main_window.is_key_down('w'):
+            dy = -1
+        if main_window.is_key_down('s'):
+            dy = +1
+        if level.player.get_is_bound():
+            if level.player.get_pos()[0] + dx < 0 or level.player.get_pos()[0] + level.player.get_size()[0] + dx > main_window.width:
+                dx = 0
+            if level.player.get_pos()[1] + dy < 0 or level.player.get_pos()[1] + level.player.get_size()[1] + dy > main_window.height:
+                dy = 0
+        # appliy velocity
+        level.player.set_velocity((dx * level.player.get_speed()[0], dy * level.player.get_speed()[1]))
+        level.draw(main_window)
+        if level.player.is_alive():
+            # update velocity
+            if level.player.get_velocity()[0] != 0:
+                level.player.set_velocity((0, level.player.get_velocity()[1]))
+            if level.player.get_velocity()[1] != 0:
+                level.player.set_velocity((level.player.get_velocity()[0], 0))
             main_window.update()
         else:
             run()
     main_window.close()
 
 
+def on_helper_collision(node, other):
+    if node.get_health() < 0:
+        node.hide()
+        node.set_health(node.start_health)
+        node.kill()
 
-def handle_collision(node, other):
-    if node.is_alive():
-        if node.is_collidable() and not node.is_hidden():
-            # if collision between node and other
-            if scene.node.is_collision(node, other):
-                print node.get_id(),":",other.get_health(), "--", other.get_id(),":", other.get_health()
-                # take damage to both nodes
-                node.health -= other.damage
-                other.health -= node.damage
-                # kill is no health
-                if node.health <= 0:
-                    node.kill()
-                if other.health <= 0:
-                    other.kill()
-                # if node has a callback call it
-                if node.on_collision:
-                    node.on_collision(node, other)
-                if other.on_collision:
-                    other.on_collision(other, node)
-            # handle collision between other and node.bullets
-            dead_bullets = []
-            for bullet in node.get_bullets():
-                if not other.is_bullet:
-                    handle_collision(bullet, other)
-                if not bullet.is_alive():
-                    dead_bullets.append(bullet)
-            for bullet in dead_bullets:
-                node.get_bullets().remove(bullet)
-            dead_bullets_other = []
-            # handle collision between node and other.children
-            for other_bullet in other.get_bullets():
-                if not node.is_bullet:
-                    handle_collision(other_bullet, node)
-                if not other_bullet.is_alive():
-                    dead_bullets_other.append(other_bullet)
-            for other_bullet in dead_bullets_other:
-                other.get_bullets().remove(other_bullet)
-            # handle collision between node and other.bullets
-            for child_other in other.get_children():
-                handle_collision(node, child_other)
 
-        for child in node.get_children():
-            handle_collision(child, other)
+def on_player_collision(node, other):
+    print"Player:", node.get_health()
+    node.set_animation("Player_Damage")
+    if not node.is_alive():
+        print "Game Over"
+        run()
+
+
+def on_enemy_collision(node, other):
+    print "Explosion"
 
 if __name__ == '__main__':
     run()

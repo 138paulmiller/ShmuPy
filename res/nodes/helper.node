@@ -1,6 +1,6 @@
 {
     "id":"Helper",
-    "health":1,
+    "health":50,
     "width": 20,
     "height": 20,
     "xspeed": 2,

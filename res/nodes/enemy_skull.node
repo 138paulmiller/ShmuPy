@@ -2,7 +2,7 @@
 	"id":"Skull",
 	"width": 30,
 	"height": 30,
-	"health":80,
+	"health":50,
 	"xspeed": 3,
 	"yspeed": 3,
 	"xvelocity":0,
@@ -20,11 +20,5 @@
 		"loop": "True"
 	}],
 	"children":
-	[{
-	    "id": "helper1",
-	    "file_id":"helper",
-	    "follow":"true",
-	    "follow_dist":[40,40]
-
-	}]
+	[]
 }

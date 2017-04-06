@@ -19,6 +19,8 @@ class Sprite(object):
         self.on_update = None
         self.on_draw = None
         self.hidden = False
+        self.alive = True
+
 
     def __deepcopy__(self, memo={}):
         sprite = Sprite(self.unique_id)
@@ -49,6 +51,15 @@ class Sprite(object):
 
     def set_start_health(self, health):
         self.start_health = health
+
+    def kill(self):
+        self.alive = False
+
+    def birth(self):
+        self.alive = True
+
+    def is_alive(self):
+        return self.alive
 
     def get_damage(self):
         return self.damage
