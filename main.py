@@ -127,7 +127,6 @@ def run():
                         if abs(e.get_pos()[0] - root.get_pos()[0]) < 15:
                             e.shoot()
                         handle_collision(root, e)
-                        handle_collision(e, root)
                 else:
                     remove.append(e)
                 e.update()
@@ -153,35 +152,41 @@ def handle_collision(node, other):
                 print node.get_id(),":",other.get_health(), "--", other.get_id(),":", other.get_health()
                 # take damage to both nodes
                 node.health -= other.damage
+                other.health -= node.damage
                 # kill is no health
                 if node.health <= 0:
                     node.kill()
+                if other.health <= 0:
+                    other.kill()
                 # if node has a callback call it
                 if node.on_collision:
                     node.on_collision(node, other)
+                if other.on_collision:
+                    other.on_collision(other, node)
             # handle collision between other and node.bullets
             dead_bullets = []
             for bullet in node.get_bullets():
-                handle_collision(bullet, other)
-                # take damage to both nodes
-                # kill is no health
-                if other.health <= 0:
-                    other.kill()
+                if not other.is_bullet:
+                    handle_collision(bullet, other)
                 if not bullet.is_alive():
                     dead_bullets.append(bullet)
             for bullet in dead_bullets:
                 node.get_bullets().remove(bullet)
             dead_bullets_other = []
             # handle collision between node and other.children
-
+            for other_bullet in other.get_bullets():
+                if not node.is_bullet:
+                    handle_collision(other_bullet, node)
+                if not other_bullet.is_alive():
+                    dead_bullets_other.append(other_bullet)
+            for other_bullet in dead_bullets_other:
+                other.get_bullets().remove(other_bullet)
             # handle collision between node and other.bullets
             for child_other in other.get_children():
                 handle_collision(node, child_other)
-                if child_other.health <= 0:
-                    child_other.kill()
+
         for child in node.get_children():
             handle_collision(child, other)
-            if other.health <= 0:
-                other.kill()
+
 if __name__ == '__main__':
     run()

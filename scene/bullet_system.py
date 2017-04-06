@@ -95,6 +95,7 @@ def load(bullet_file):
                     bullet.set_health(1) # bullets die instantly default
                 if 'damage' in data:
                     bullet.set_damage(data['damage'])
+                bullet.is_bullet = True
                 bullet_system.source_bullet = bullet
                 if 'rate' in data:
                     bullet_system.rate = data['rate']

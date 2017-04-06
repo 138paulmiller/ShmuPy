@@ -32,6 +32,7 @@ class Node(graphics.sprite.Sprite):
         self.follow = False  # follow parent or not
         self.follow_dist = [0, 0]
         self.alive = True
+        self.is_bullet = False
 
     def __deepcopy__(self, memo={}):
         sprite = super(Node, self).__deepcopy__(memo)
@@ -61,6 +62,7 @@ class Node(graphics.sprite.Sprite):
         node.on_collision = self.on_collision
         node.bullet_system = deepcopy(self.bullet_system)
         node.alive = self.alive
+        node.is_bullet = self.is_bullet
         memo[self] = node
         return node
 
