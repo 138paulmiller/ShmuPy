@@ -40,6 +40,7 @@ class Sprite(object):
         sprite.set_animation(sprite.current_animation)
         sprite.prev_animation = self.prev_animation # id to prev animation
         sprite.is_bound = self.is_bound
+        sprite.alive = self.alive
         memo[self] = sprite
         return sprite
 

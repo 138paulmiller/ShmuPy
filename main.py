@@ -22,7 +22,7 @@ def run():
     root.set_on_collision(on_player_collision)
     for child in root.get_children():
         child.hide()
-        child.birth()
+        child.kill()
         child.set_on_collision(on_helper_collision)
         child.set_pos((root.get_pos()[0], root.get_pos()[1]))
     level.set_player(root)
@@ -84,6 +84,14 @@ def run():
         # draw ui stuff
         graphics.draw_font(main_window.display, 'Health:{:3}'.format(level.player.get_health()),
                            graphics.font, graphics.font_color, (0, 0))
+        i = 0
+        for child in level.player.get_children():
+            if child.is_alive() and not child.is_hidden():
+                graphics.draw_font(main_window.display, 'Health:{:3}'.format(child.get_health()),
+                                   graphics.font_small, graphics.font_color, (0, 24*i+32))
+                i+=1
+
+
         if level.player.is_alive():
             # update velocity
             if level.player.get_velocity()[0] != 0:

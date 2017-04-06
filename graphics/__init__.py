@@ -30,7 +30,8 @@ pygame.init()                   # Initialize pygame
 clock = pygame.time.Clock()     # Clock object ised to stabalize framerate
 prev_time = 0
 images = {}                     # Images loaded from the image_loader
-font = pygame.font.SysFont('monospace bold', 42)
+font = pygame.font.SysFont('monospace bold', 32)
+font_small = pygame.font.SysFont('monospace bold', 24)
 font_color = (250, 200, 3)
 """
 Graphics Utility Functions

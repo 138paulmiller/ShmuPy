@@ -60,7 +60,6 @@ class Node(graphics.sprite.Sprite):
         node.collidable = self.collidable
         node.on_collision = self.on_collision
         node.bullet_system = deepcopy(self.bullet_system)
-        node.alive = self.alive
         node.is_bullet = self.is_bullet
         memo[self] = node
         return node
