@@ -6,7 +6,7 @@ import level
 
 def on_player_collision(node, other):
     print"Player:", node.get_health()
-    node.set_animation("Player_Damage")
+    node.set_animation("acqua_damage")
 
 
 
