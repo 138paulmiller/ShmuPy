@@ -1,5 +1,5 @@
 {
-	"id":"Skull",
+	"id":"skull",
 	"width": 30,
 	"height": 30,
 	"health":30,
@@ -7,14 +7,14 @@
 	"yspeed": 3,
 	"xvelocity":0,
 	"yvelocity":3,
-    "default":"Skull_Idle",
+    "default":"skull_idle",
     "bullet_system":"enemy",
     "bound":"false",
     "collide":"True",
     "damage":10,
 	"animation":
 	[{
-		"id": "Skull_Idle",
+		"id": "skull_idle",
 		"images": ["skull_0.png", "skull_1.png"],
 		"speed": 0.15,
 		"loop": "True"

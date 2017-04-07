@@ -12,35 +12,15 @@ def run():
     # creates a window instance
     main_window = graphics.window.Window(580, 720)
     # load all images from img
-    level = scene.level.Level()
     # load all images used
     graphics.images = graphics.image_loader.load_images("res/img/")
     # load root (player)
-    root = scene.node.load("player.node")
-    root.show()
-    root.set_pos((main_window.width / 2, main_window.height / 2))
-    root.set_on_collision(on_player_collision)
-    for child in root.get_children():
-        child.hide()
-        child.kill()
-        child.set_on_collision(on_helper_collision)
-        child.set_pos((root.get_pos()[0], root.get_pos()[1]))
-    level.set_player(root)
-
-    # load enemies
-    enemy = scene.node.load("enemy_skull.node")
-    for i in range(500):
-        level.add_enemy(deepcopy(enemy))
-        level.enemies[-1].set_pos((random.randint(0, main_window.width), -100 * random.randint(1, 500)))
-        level.enemies[-1].birth()
-        level.enemies[-1].hide()
-        level.enemies[-1].set_on_collision(on_enemy_collision)
-
+    level = scene.level.load('level0')
 
     # window keyboard callbacks
     def on_key_down(key):
         if key == ord('e'): ## DEBUGGING
-            for helper in root.get_children():
+            for helper in level.player.get_children():
                 if helper.is_hidden():
                     helper.show()
                     helper.birth()
@@ -57,9 +37,9 @@ def run():
         main_window.clear((0, 10, 30))
         ## Debug zoom
         if main_window.is_key_down('z'):
-            root.set_size((root.get_size()[0]+1, root.get_size()[1]+1))
+            level.player.set_size((level.player.get_size()[0]+1, level.player.get_size()[1]+1))
         if main_window.is_key_down('x'):
-            root.set_size((root.get_size()[0] - 1, root.get_size()[1] - 1))
+            level.player.set_size((level.player.get_size()[0] - 1, level.player.get_size()[1] - 1))
 
         # get players dx dy and set based on keys down
         dx, dy = 0, 0
@@ -100,29 +80,13 @@ def run():
                 level.player.set_velocity((level.player.get_velocity()[0], 0))
             # update window
             main_window.update()
-
         else:
             run()
     main_window.close()
 
 
-def on_helper_collision(node, other):
-    if node.get_health() < 0:
-        node.hide()
-        node.set_health(node.start_health)
-        node.kill()
 
 
-def on_player_collision(node, other):
-    print"Player:", node.get_health()
-    node.set_animation("Player_Damage")
-    if not node.is_alive():
-        print "Game Over"
-        run()
-
-
-def on_enemy_collision(node, other):
-    print "Explosion"
 
 if __name__ == '__main__':
     run()

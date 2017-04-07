@@ -1,0 +1,46 @@
+{
+    "id":"Level0",
+    "player":"acqua",
+    "startx":500,
+    "starty":500,
+    "scroll":"topdown",
+    "enemies":
+    [
+    {
+        "id":"skull",
+        "x":500,
+        "y":-500
+    },
+    {
+        "id":"skull",
+        "x":500,
+        "y":-600
+    },
+    {
+        "id":"skull",
+        "x":500,
+        "y":-700
+    },
+    {
+        "id":"skull",
+        "x":500,
+        "y":-800
+    },
+    {
+        "id":"skull",
+        "x":500,
+        "y":-900
+    },
+    {
+        "id":"skull",
+        "x":500,
+        "y":-1000
+    },
+    {
+        "id":"skull",
+        "x":500,
+        "y":-1100
+    }
+    ]
+
+}

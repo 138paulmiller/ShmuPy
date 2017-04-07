@@ -1,23 +1,23 @@
 {
-	"id":"Player",
+	"id":"acqua",
 	"width": 45,
 	"health":100,
 	"height": 45,
 	"xspeed": 3.5,
 	"yspeed": 3.5,
-    "default":"Player_Idle",
+    "default":"acqua_idle",
     "bullet_system":"simple",
     "bound":"True",
     "collide":"True",
 	"animation":
 	[{
-		"id": "Player_Idle",
+		"id": "acqua_idle",
 		"images": ["acqua_0.png", "acqua_1.png"],
 		"speed": 0.15,
 		"loop": "True"
 	},
 	{
-		"id": "Player_Damage",
+		"id": "acqua_damage",
 		"images": ["acqua_1.png", "acqua_2.png"],
 		"speed": 0.4,
 		"loop": "False"
