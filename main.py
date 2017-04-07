@@ -62,7 +62,7 @@ def run():
             root.set_size((root.get_size()[0] - 1, root.get_size()[1] - 1))
 
         # get players dx dy and set based on keys down
-        dx, dy = level.player.get_velocity()
+        dx, dy = 0, 0
         if main_window.is_key_down('\r'):
             level.player.shoot()
         if main_window.is_key_down('a'):

@@ -276,8 +276,8 @@ def handle_collision(node, other):
     # handles node collisions by applying damage to node and or other
     # and making callback on collision between two nodes
 
-    if node.is_alive():
-        if node.is_collidable() and not node.is_hidden():
+    if node.is_alive() and other.is_alive():
+        if node.is_collidable() and not node.is_hidden() and other.is_collidable() and not other.is_hidden():
             # if collision between node and other
             if scene.node.is_collision(node, other):
                 print node.get_id(),":",other.get_health(), "--", other.get_id(),":", other.get_health()
@@ -294,26 +294,26 @@ def handle_collision(node, other):
                     node.on_collision(node, other)
                 if other.on_collision:
                     other.on_collision(other, node)
-            # handle collision between other and node.bullets
-            dead_bullets = []
-            for bullet in node.get_bullets():
-                if not other.is_bullet:
-                    handle_collision(bullet, other)
-                if not bullet.is_alive():
-                    dead_bullets.append(bullet)
-            for bullet in dead_bullets:
-                node.get_bullets().remove(bullet)
-            dead_bullets_other = []
-            # handle collision between node and other.children
-            for other_bullet in other.get_bullets():
-                if not node.is_bullet:
-                    handle_collision(other_bullet, node)
-                if not other_bullet.is_alive():
-                    dead_bullets_other.append(other_bullet)
-            for other_bullet in dead_bullets_other:
-                other.get_bullets().remove(other_bullet)
-            # handle collision between node and other.bullets
-            for child_other in other.get_children():
-                handle_collision(node, child_other)
-        for child in node.get_children():
-            handle_collision(child, other)
+    # handle collision between other and node.bullets
+    dead_bullets = []
+    for bullet in node.get_bullets():
+        if not other.is_bullet:
+            handle_collision(bullet, other)
+        if not bullet.is_alive():
+            dead_bullets.append(bullet)
+    for bullet in dead_bullets:
+        node.get_bullets().remove(bullet)
+    dead_bullets_other = []
+    # handle collision between node and other.bullets
+    for other_bullet in other.get_bullets():
+        if not node.is_bullet:
+            handle_collision(other_bullet, node)
+        if not other_bullet.is_alive():
+            dead_bullets_other.append(other_bullet)
+    for other_bullet in dead_bullets_other:
+        other.get_bullets().remove(other_bullet)
+    # handle collision between node and other.children
+    for child_other in other.get_children():
+        handle_collision(node, child_other)
+    for child in node.get_children():
+        handle_collision(child, other)

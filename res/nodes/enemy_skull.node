@@ -2,7 +2,7 @@
 	"id":"Skull",
 	"width": 30,
 	"height": 30,
-	"health":50,
+	"health":30,
 	"xspeed": 3,
 	"yspeed": 3,
 	"xvelocity":0,

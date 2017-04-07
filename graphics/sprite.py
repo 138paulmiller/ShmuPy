@@ -77,6 +77,7 @@ class Sprite(object):
     def update(self):
         if self.on_update:
             self.on_update()
+        self.move_by(self.velocity)
         if self.current_animation:
             if self.animations[self.current_animation].is_done():
                 self.set_animation(self.prev_animation)
@@ -86,8 +87,7 @@ class Sprite(object):
     def draw(self, window):
         if self.on_draw:
             self.on_draw(window)
-        self.move_by(self.velocity)
-        if self.current_animation and not self.hidden:
+        if self.current_animation and not self.hidden and self.alive:
             self.animations[self.current_animation].draw(window.display, (self.pos, self.size), self.flip)
 
     def add_animation(self, unique_id, animation):

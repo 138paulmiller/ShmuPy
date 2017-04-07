@@ -18,20 +18,19 @@ class Level(object):
     def draw(self, window):
         remove = []
         for e in self.enemies:
-            if e.is_alive():
-                bound = e.get_pos()[1]
-                e.draw(window)
-                if bound < window.height:
-                    if bound + e.get_size()[1] > 0:
-                        e.show()
-                        if abs(e.get_pos()[0] - self.player.get_pos()[0]) < 15:
-                            e.shoot()
-                        node.handle_collision(self.player, e)
-                else:
-                    remove.append(e)
-                e.update()
+            e.update()
+            e.draw(window)
+            bound = e.get_pos()[1]
+            if bound < window.height:
+                if bound + e.get_size()[1] > 0:
+                    e.show()
+                    if e.is_alive() and abs(e.get_pos()[0] - self.player.get_pos()[0]) < 15:
+                        e.shoot()
+                    node.handle_collision(self.player, e)
+            else:
+                remove.append(e)
         for r in remove:
             if r in self.enemies:
                 self.enemies.remove(r)
-        self.player.draw(window)
         self.player.update()
+        self.player.draw(window)
