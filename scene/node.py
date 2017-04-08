@@ -213,6 +213,8 @@ def load(node_file):
             node.set_pos((data['x'], data['y']))
         if 'xspeed' in data and 'yspeed' in data:
             node.set_speed((data['xspeed'], data['yspeed']))
+        if 'xflip' in data and 'yflip' in data:
+            node.set_flip((data['xflip'], data['yflip']))
         if 'xvelocity' in data and 'yvelocity' in data:
             node.set_velocity((data['xvelocity'], data['yvelocity']))
         if 'bullet_system' in data:

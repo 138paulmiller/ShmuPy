@@ -5,6 +5,8 @@
     "height": 20,
     "xspeed": 2,
 	"yspeed": 2,
+    "xflip": 0,
+	"yflip": 0,
     "default":"pieret_idle",
     "bullet_system":"helper",
     "duplicate":"true",
