@@ -25,13 +25,13 @@
 	"children":
 	[{
 	    "id": "helper1",
-	    "file_id":"helper",
+	    "file_id":"pieret",
 	    "follow":"true",
 	    "follow_dist":[40,40]
 	},
 	{
 	    "id": "helper2",
-	    "file_id":"helper",
+	    "file_id":"pieret",
 	    "follow":"true",
 	    "follow_dist":[20,20]
 	}]

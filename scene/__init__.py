@@ -15,6 +15,7 @@ def on_enemy_collision(node, other):
 
 
 def on_helper_collision(helper, other):
+    helper.set_animation("pieret_damage")
     if helper.get_health() < 0:
         helper.hide()
         helper.set_health(helper.start_health)

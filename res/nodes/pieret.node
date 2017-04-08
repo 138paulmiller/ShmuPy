@@ -1,0 +1,25 @@
+{
+    "id":"pieret",
+    "health":50,
+    "width": 20,
+    "height": 20,
+    "xspeed": 2,
+	"yspeed": 2,
+    "default":"pieret_idle",
+    "bullet_system":"helper",
+    "duplicate":"true",
+    "collide":"true",
+	"animation":
+	[{
+		"id": "pieret_idle",
+		"images": ["pieret_0.png", "pieret_1.png"],
+		"speed": 0.15,
+		"loop": "True"
+	},
+	{
+		"id": "pieret_damage",
+		"images": ["pieret_1.png", "pieret_2.png"],
+		"speed": 0.15,
+		"loop": "False"
+	}]
+}
