@@ -59,11 +59,24 @@ def load(level_file):
             if 'starty' in data:
                 pos[1] = data['starty']
             player.set_pos(pos)
+            bullet = player.get_bullet_system().bullet()
+            if l.scroll == 'sidescroll':
+                bullet.set_velocity((bullet.get_speed()[0], 0))
+            if l.scroll == 'topdown':
+                bullet.set_velocity((0, -bullet.get_speed()[1]))
             for child in player.get_children():
                 child.hide()
                 child.kill()
                 child.set_on_collision(scene.on_helper_collision)
                 child.set_pos((player.get_pos()[0], player.get_pos()[1]))
+                bullet = child.get_bullet_system().bullet()
+                if l.scroll == 'sidescroll':
+                    child.set_velocity((-child.get_speed()[0], 0))
+                    bullet.set_velocity((bullet.get_speed()[0], 0))
+                if l.scroll == 'topdown':
+                    child.set_velocity((0, child.get_speed()[1]))
+                    bullet.set_velocity((0, -bullet.get_speed()[1]))
+
             l.set_player(player)
         if 'enemies' in data:
             for enemy_data in data['enemies']:
@@ -79,10 +92,13 @@ def load(level_file):
                         pos[1] = enemy_data['y']
                     enemy.set_pos(pos)
                     vel = [0, 0]
-                    if l.scroll == 'side':
+                    bullet = enemy.get_bullet_system().bullet()
+                    if l.scroll == 'sidescroll':
                         vel[0] = -enemy.get_speed()[0]
+                        bullet.set_velocity((-bullet.get_speed()[0], 0))
                     elif l.scroll == 'topdown':
                         vel[1] = enemy.get_speed()[1]
+                        bullet.set_velocity((0, bullet.get_speed()[1]))
                     enemy.set_velocity(vel)
                     l.add_enemy(enemy)
                 else:

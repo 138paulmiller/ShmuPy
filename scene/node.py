@@ -64,6 +64,9 @@ class Node(graphics.sprite.Sprite):
         memo[self] = node
         return node
 
+    def get_bullet_system(self):
+        return self.bullet_system
+
     def set_is_duplicate(self, is_duplicate):
         self.is_duplicate = is_duplicate
 
@@ -211,8 +214,10 @@ def load(node_file):
             print node.get_id(), ":Missing size(x and y)!!!"
         if 'x' in data and 'y' in data:
             node.set_pos((data['x'], data['y']))
-        if 'xspeed' in data and 'yspeed' in data:
-            node.set_speed((data['xspeed'], data['yspeed']))
+        if 'xspeed' in data:
+            node.speed[0] = data['xspeed']
+        if 'yspeed' in data:
+            node.speed[1] = data['yspeed']
         if 'xflip' in data and 'yflip' in data:
             node.set_flip((data['xflip'], data['yflip']))
         if 'xvelocity' in data and 'yvelocity' in data:

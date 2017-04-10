@@ -20,6 +20,9 @@ class BulletSystem(object):
         memodict[self] = other
         return other
 
+    def bullet(self):
+        return self.source_bullet
+
     def get_bullets(self):
         return self.bullets
 
@@ -56,33 +59,30 @@ def load(bullet_file):
         data = json.loads(file.read())
         if 'id' in data:
             bullet = scene.node.Node(data['id'].lower())
+            print bullet.get_velocity(), "LOADING"
             if 'width' in data and 'height' in data:
                 bullet.set_size((data['width'], data['height']))
-                if 'speed' in data:
-                    speed = data['speed']
-                    bullet.set_speed((0,speed))
-                    bullet.set_velocity((0,speed))
-                    # parse animations
-                    if 'animation' in data:
-                        for anim_data in data['animation']:
-                            imgs = []
-                            seq = []
-                            speed = 1
-                            for img_file in anim_data['images']:
-                                seq.append(len(imgs))
-                                imgs.append(graphics.images[img_file])
-                            loop = anim_data['loop'].lower() in ('true', '1', 'yes')
-                            if 'speed' in anim_data:
-                                speed = anim_data['speed']
-                            if 'id' in anim_data:
-                                anim_id = anim_data['id']
-                                bullet.add_animation(anim_id, graphics.animation.Animation(imgs, seq, speed, loop))
-                            else:
-                                bullet.get_id(), ":Child Missing Id!!!"
-                        if 'default' in data:
-                            bullet.set_animation(data['default'].lower())
+                # parse animations
+                if 'animation' in data:
+                    for anim_data in data['animation']:
+                        imgs = []
+                        seq = []
+                        speed = 1
+                        for img_file in anim_data['images']:
+                            seq.append(len(imgs))
+                            imgs.append(graphics.images[img_file])
+                        loop = anim_data['loop'].lower() in ('true', '1', 'yes')
+                        if 'speed' in anim_data:
+                            speed = anim_data['speed']
+                        if 'id' in anim_data:
+                            anim_id = anim_data['id']
+                            bullet.add_animation(anim_id, graphics.animation.Animation(imgs, seq, speed, loop))
                         else:
-                            print bullet.get_id(), ":Missing Default Animation!!!"
+                            bullet.get_id(), ":Child Missing Id!!!"
+                    if 'default' in data:
+                        bullet.set_animation(data['default'].lower())
+                    else:
+                        print bullet.get_id(), ":Missing Default Animation!!!"
                 if 'bound' in data:
                     bullet.set_is_bound(data['bound'].lower() in ('true', '1', 'yes'))
                 if 'collide' in data:
@@ -95,6 +95,15 @@ def load(bullet_file):
                     bullet.set_health(1) # bullets die instantly default
                 if 'damage' in data:
                     bullet.set_damage(data['damage'])
+                if 'bound' in data:
+                    bullet.set_is_bound(data['bound'].lower() in ('true', '1', 'yes'))
+                speed = [0, 0]
+                if 'xspeed' in data:
+                    speed[0] = data['xspeed']
+                if 'yspeed' in data:
+                    speed[1] = data['yspeed']
+                bullet.set_speed(speed)
+
                 bullet.is_bullet = True
                 bullet_system.source_bullet = bullet
                 if 'rate' in data:
