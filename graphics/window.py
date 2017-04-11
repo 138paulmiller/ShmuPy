@@ -22,6 +22,7 @@ class Window(object):
         self.on_key_up = None
         self.on_key_down = None
         self.on_mouse_move = None
+        self.on_mouse_button_down = None
 
     def is_key_down(self, key):
         try:
@@ -35,6 +36,7 @@ class Window(object):
     def is_mouse_button_down(self, button_id):
         if button_id < len(self.mouse_button_states):
             return self.mouse_button_states[button_id]
+
 
     def get_mouse_pos(self):
         return self.mouse_pos
@@ -51,6 +53,9 @@ class Window(object):
 
     def set_on_mouse_move(self, callback_func):
         self.on_mouse_move = callback_func
+
+    def set_mouse_button_down(self, callback_func):
+        self.on_mouse_button_down = callback_func
 
     def clear(self, color):
         self.display.fill(color)
@@ -74,6 +79,8 @@ class Window(object):
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 print event.button
                 self.mouse_button_states[event.button - 1] = True
+                if self.on_mouse_button_down:
+                    self.on_mouse_button_down(event.button - 1)
             elif event.type == pygame.MOUSEBUTTONUP:
                 self.mouse_button_states[event.button-1] = False
             elif event.type == pygame.MOUSEMOTION:

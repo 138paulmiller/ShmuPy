@@ -1,8 +1,5 @@
-
 import graphics
 import scene
-import random
-from copy import deepcopy
 
 
 def run():
@@ -69,8 +66,7 @@ def run():
             if child.is_alive() and not child.is_hidden():
                 graphics.draw_font(main_window.display, 'Health:{:3}'.format(child.get_health()),
                                    graphics.font_small, graphics.font_color, (0, 24*i+32))
-                i+=1
-
+                i += 1
 
         if level.player.is_alive():
             # update velocity
@@ -83,10 +79,3 @@ def run():
         else:
             run()
     main_window.close()
-
-
-
-
-
-if __name__ == '__main__':
-    run()
