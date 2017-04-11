@@ -54,9 +54,9 @@ class Animation(object):
                     self.done = True
                     self.current_i = 0
 
-    def draw(self, display, (pos, size), flip=(0, 0)):
+    def draw(self, display, (pos, size), flip=(0, 0), translate=(0,0)):
         img_i = self.sequence[self.current_i]
         if img_i < len(self.images):
             img = graphics.flip_image(self.images[img_i], flip)
-            graphics.render_img(display, img, (pos, size))
+            graphics.render_img(display, img, (pos, size),translate)
 

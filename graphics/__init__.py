@@ -72,7 +72,7 @@ def render_rect(display, ((x, y), (w, h)), (r, g, b)):
     pygame.draw.rect(display, (r, g, b), ((x, y), (w, h)))
 
 
-def render_img(display, image, ((x, y), (w, h))):
+def render_img(display, image, ((x, y), (w, h)),(xoff, yoff)):
     """
     :param display:
         display to render image onto
@@ -82,8 +82,10 @@ def render_img(display, image, ((x, y), (w, h))):
         position of image on display (0,0) is top-left corner
     :param (w, h):
        size on display (width, height)
+     :param (xoff, yoff):
+        offset of translation of image on display (0,0) is top-left corner
     """
-    display.blit(pygame.transform.scale(image, (w, h)), (x, y))
+    display.blit(pygame.transform.scale(image, (w, h)), (x+xoff, y+yoff))
 
 
 def flip_image(image, (x, y)):

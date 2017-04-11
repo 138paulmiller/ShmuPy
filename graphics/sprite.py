@@ -20,6 +20,7 @@ class Sprite(object):
         self.on_draw = None
         self.hidden = False
         self.alive = True
+        self.translate = [0,0]
 
 
     def __deepcopy__(self, memo={}):
@@ -41,6 +42,7 @@ class Sprite(object):
         sprite.prev_animation = self.prev_animation # id to prev animation
         sprite.is_bound = self.is_bound
         sprite.alive = self.alive
+        sprite.translate = deepcopy(self.translate)
         memo[self] = sprite
         return sprite
 
@@ -88,7 +90,7 @@ class Sprite(object):
         if self.on_draw:
             self.on_draw(window)
         if self.current_animation and not self.hidden and self.alive:
-            self.animations[self.current_animation].draw(window.display, (self.pos, self.size), self.flip)
+            self.animations[self.current_animation].draw(window.display, (self.pos, self.size), self.flip, self.translate)
 
     def add_animation(self, unique_id, animation):
         unique_id = unique_id.lower()
@@ -133,6 +135,10 @@ class Sprite(object):
     def set_pos(self, (x, y)):
         self.pos[0] = x
         self.pos[1] = y
+
+    def set_translate(self, (x, y)):
+        self.translate[0] = x
+        self.translate[1] = y
 
     def get_size(self):
         return self.size
