@@ -59,13 +59,13 @@ def run():
         level.player.set_velocity((dx * level.player.get_speed()[0], dy * level.player.get_speed()[1]))
         level.draw(main_window)
         # draw ui stuff
-        graphics.draw_font(main_window.display, 'Health:{:3}'.format(level.player.get_health()),
-                           graphics.font, graphics.font_color, (0, 0))
+        graphics.render_font(main_window.display, 'Health:{:3}'.format(level.player.get_health()),
+                             graphics.font, graphics.font_color, (0, 0))
         i = 0
         for child in level.player.get_children():
             if child.is_alive() and not child.is_hidden():
-                graphics.draw_font(main_window.display, 'Health:{:3}'.format(child.get_health()),
-                                   graphics.font_small, graphics.font_color, (0, 24*i+32))
+                graphics.render_font(main_window.display, 'Health:{:3}'.format(child.get_health()),
+                                     graphics.font_small, graphics.font_color, (0, 24*i+32))
                 i += 1
 
         if level.player.is_alive():

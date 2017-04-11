@@ -1,6 +1,8 @@
 from copy import deepcopy
 import scene
 import graphics
+import ui
+import os
     # TODO add node img for starting pos
     # TODO ui for selecting player, helper and enemy nodes by listing files
     # TODO export and import for level, also new level
@@ -44,10 +46,28 @@ class Editor(object):
 
 
 def run(level_file=None):
+
     main_window = graphics.window.Window(580, 720)
     graphics.images = graphics.image_loader.load_images("res/img/")
-    editor = Editor()
 
+    nodes = []
+    bullets = []
+    for dir_name, subdir_list, file_list in os.walk(os.path.realpath("res/nodes/"),
+                                                            topdown=False):  # do not travers . and ..
+        for file_name in file_list:
+            nodes.append(file_name)
+    for dir_name, subdir_list, file_list in os.walk(os.path.realpath("res/bullets/"),
+                                                            topdown=False):  # do not travers . and ..
+        for file_name in file_list:
+            bullets.append(file_name)
+    print "\nNodes ", nodes
+    print "\nBullets", bullets
+    border = 5
+    font_size = 24
+    label = ui.label.Label("Label", (10, 10),
+                           (font_size*5, font_size+border),
+                           font_size, border)
+    editor = Editor()
 
     main_window.set_on_key_down(editor.on_key_down)
     main_window.set_mouse_button_down(editor.on_mouse_button_down)
@@ -72,6 +92,7 @@ def run(level_file=None):
             main_window.is_key_down('s'):
             editor.offset[1] += 1
         editor.draw(main_window)
+        label.draw(main_window)
         main_window.update()
 
 

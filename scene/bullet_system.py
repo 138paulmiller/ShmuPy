@@ -53,7 +53,7 @@ class BulletSystem(object):
 
 def load(bullet_file):
     bullet_system = BulletSystem(None, 0)
-    bullet_file = os.path.realpath('res/nodes/{}'.format(bullet_file))
+    bullet_file = os.path.realpath('res/bullets/{}'.format(bullet_file))
     #print "Loading:", bullet_file
     with open(bullet_file) as file:
         data = json.loads(file.read())

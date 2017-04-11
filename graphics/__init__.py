@@ -38,11 +38,6 @@ Graphics Utility Functions
     Used by the other modules in package to simplify rendering
 """
 
-
-def draw_font(display, text, font, color, pos):
-    display.blit(font.render(text, 1, color), pos)
-
-
 def get_display((width, height)):
     """
     return:
@@ -58,7 +53,11 @@ def update():
     pygame.display.flip()  # swap buffers
 
 
-def render_rect(display, ((x, y), (w, h)), (r, g, b)):
+def render_font(display, text, font, color, pos):
+    display.blit(font.render(text, 1, color), pos)
+
+
+def render_rect(display, ((x, y), (w, h)), (r, g, b), (xoff, yoff)):
     """
     :param display:
         display to render rect onto
@@ -69,10 +68,10 @@ def render_rect(display, ((x, y), (w, h)), (r, g, b)):
    :param (r,g,b):
       color of rectangle
     """
-    pygame.draw.rect(display, (r, g, b), ((x, y), (w, h)))
+    pygame.draw.rect(display, (r, g, b), ((x+xoff, y+yoff), (w, h)))
 
 
-def render_img(display, image, ((x, y), (w, h)),(xoff, yoff)):
+def render_img(display, image, ((x, y), (w, h)), (xoff, yoff)):
     """
     :param display:
         display to render image onto
