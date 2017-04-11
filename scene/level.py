@@ -8,9 +8,13 @@ class Level(object):
         self.boss = None  # boss node
         self.player = None  # player node
         self.scroll = None
+        self.pause = False
 
     def set_player(self, player):
         self.player = player
+
+    def set_pause(self, pause):
+        self.pause = pause
 
     def set_boss(self, boss):
         self.boss = boss
@@ -18,25 +22,31 @@ class Level(object):
     def add_enemy(self, enemy):
         self.enemies.append(enemy)
 
+    def get_enemies(self):
+        return self.enemies
+
     def draw(self, window):
         remove = []
         for e in self.enemies:
-            e.update()
+            if not self.pause:
+                e.update()
             e.draw(window)
             bound = e.get_pos()[1]
             if bound < window.height:
                 if bound + e.get_size()[1] > 0:
                     e.show()  # show enemy if in bounds
-                    if e.is_alive() and abs(e.get_pos()[0] - self.player.get_pos()[0]) < 15:
-                        e.shoot()
-                    scene.node.handle_collision(self.player, e)
+                    if self.player:
+                        if e.is_alive() and abs(e.get_pos()[0] - self.player.get_pos()[0]) < 15:
+                            e.shoot()
+                        scene.node.handle_collision(self.player, e)
             else:
                 remove.append(e)
         for r in remove:
             if r in self.enemies:
                 self.enemies.remove(r)
-        self.player.update()
-        self.player.draw(window)
+        if self.player:
+            self.player.update()
+            self.player.draw(window)
 
 
 def load(level_file):
