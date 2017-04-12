@@ -78,10 +78,13 @@ def load(node_file):
                 if 'id' in child_data:
                     child_id = child_data['id']
                     if 'file_id' in child_data:
-                        path = node_file[0:node_file.rfind('/')]
+                        bs = '/'
+                        if os.name == 'nt':
+                            bs = '\\'
+                        path = node_file[0:node_file.rfind(bs)]
                         parent_dir = ''
-                        if path.rfind('/') >= 0:
-                            parent_dir = path[path.rfind('/'):]
+                        if path.rfind(bs) >= 0:
+                            parent_dir = path[path.rfind(bs):]
                         print parent_dir
                         child = load('{}/{}.node'.format(parent_dir, child_data['file_id'].lower()))
                         child.set_id(child_id)
