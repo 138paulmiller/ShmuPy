@@ -127,6 +127,11 @@ class Node(graphics.sprite.Sprite):
     def set_follow(self, follow):
         self.follow = follow
 
+    def move_by(self, (x, y)):
+        super(Node, self).move_by((x, y))
+        for c in self.get_children():
+            c.move_by((x, y))
+
     def get_follow(self):
         return self.follow
 

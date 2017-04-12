@@ -30,9 +30,7 @@ pygame.init()                   # Initialize pygame
 clock = pygame.time.Clock()     # Clock object ised to stabalize framerate
 prev_time = 0
 images = {}                     # Images loaded from the image_loader
-font = pygame.font.SysFont('monospace bold', 32)
-font_small = pygame.font.SysFont('monospace bold', 24)
-font_color = (250, 200, 3)
+
 """
 Graphics Utility Functions
     Used by the other modules in package to simplify rendering
@@ -68,7 +66,7 @@ def render_rect(display, ((x, y), (w, h)), (r, g, b), (xoff, yoff)):
    :param (r,g,b):
       color of rectangle
     """
-    pygame.draw.rect(display, (r, g, b), ((x+xoff, y+yoff), (w, h)))
+    pygame.draw.rect(display, (r, g, b), ((x+xoff, y+yoff), (w, h)), 0)
 
 
 def render_img(display, image, ((x, y), (w, h)), (xoff, yoff)):
