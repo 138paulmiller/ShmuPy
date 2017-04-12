@@ -1,0 +1,21 @@
+{
+	"id":"lil",
+	"width": 25,
+	"height": 25,
+	"health":10,
+	"xspeed": 3,
+	"yspeed": 3,
+	"xvelocity":0,
+	"yvelocity":3,
+    "default":"lil_idle",
+    "bound":"false",
+    "collide":"True",
+    "damage":10,
+	"animation":
+	[{
+		"id": "lil_idle",
+		"images": ["skull_0.png", "skull_1.png"],
+		"speed": 0.15,
+		"loop": "True"
+	}]
+}

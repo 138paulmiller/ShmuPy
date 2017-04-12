@@ -20,5 +20,10 @@
 		"loop": "True"
 	}],
 	"children":
-	[]
+	[{
+	    "id": "helper1",
+	    "file_id":"lil",
+	    "follow":"true",
+	    "follow_dist":[40,40]
+	}]
 }

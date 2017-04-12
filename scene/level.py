@@ -2,6 +2,7 @@ import scene
 import json
 import os
 
+
 class Level(object):
     def __init__(self):
         self.enemies = []  # enemy nodes
@@ -12,6 +13,10 @@ class Level(object):
 
     def set_player(self, player):
         self.player = player
+
+    def get_player(self):
+        return self.player
+
 
     def set_pause(self, pause):
         self.pause = pause
@@ -30,22 +35,23 @@ class Level(object):
         for e in self.enemies:
             if not self.pause:
                 e.update()
+                bound = e.get_pos()[1]
+                if bound < window.height:
+                    if bound + e.get_size()[1] > 0:
+                        e.show()  # show enemy if in bounds
+                        if self.player:
+                            if e.is_alive() and abs(e.get_pos()[0] - self.player.get_pos()[0]) < 15:
+                                e.shoot()
+                            scene.node.handle_collision(self.player, e)
+                else:
+                    remove.append(e)
             e.draw(window)
-            bound = e.get_pos()[1]
-            if bound < window.height:
-                if bound + e.get_size()[1] > 0:
-                    e.show()  # show enemy if in bounds
-                    if self.player:
-                        if e.is_alive() and abs(e.get_pos()[0] - self.player.get_pos()[0]) < 15:
-                            e.shoot()
-                        scene.node.handle_collision(self.player, e)
-            else:
-                remove.append(e)
         for r in remove:
             if r in self.enemies:
                 self.enemies.remove(r)
         if self.player:
-            self.player.update()
+            if not self.pause:
+                self.player.update()
             self.player.draw(window)
 
 
@@ -61,7 +67,7 @@ def load(level_file):
         if 'scroll' in data:
             l.scroll = data['scroll']
         if 'player' in data:
-            player = scene.node.load('{}.node'.format(data['player']))
+            player = scene.node_loader.load('players/{}.node'.format(data['player']))
             player.set_on_collision(scene.on_player_collision)
             pos = [500, 500]
             if 'startx' in data:
@@ -91,7 +97,7 @@ def load(level_file):
         if 'enemies' in data:
             for enemy_data in data['enemies']:
                 if 'id' in enemy_data:
-                    enemy = scene.node.load('{}.node'.format(enemy_data['id']))
+                    enemy = scene.node_loader.load('enemies/{}.node'.format(enemy_data['id']))
                     enemy.set_on_collision(scene.on_enemy_collision)
                     enemy.birth()
                     enemy.hide()

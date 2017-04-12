@@ -53,20 +53,17 @@ class Menu(object):
         return None
 
     def draw(self, window):
+        self.selected = None
         if not self.is_hidden:
-            self.selected = None
             i = 0
             for label in self.labels.values():
                 label.pos = (self.pos[0], self.pos[1]+i * self.size[1])
                 i+=1
-                if not self.sticky:
-                    if label.is_point_in(window.get_mouse_pos()):
-                        self.selected = label
-                    else:
-                        label.rect_color = self.rect_color
-                        label.draw(window)
+                if label.is_point_in(window.get_mouse_pos()):
+                    self.selected = label
                 else:
-                    label.draw(window)
+                    label.rect_color = self.rect_color
+                label.draw(window)
             if not self.sticky and self.selected:
                 self.selected.rect_color = self.highlight_color
                 self.selected.draw(window)
