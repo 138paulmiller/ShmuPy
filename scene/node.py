@@ -129,8 +129,9 @@ class Node(graphics.sprite.Sprite):
 
     def move_by(self, (x, y)):
         super(Node, self).move_by((x, y))
-        for c in self.get_children():
-            c.move_by((x, y))
+        if self.follow:
+            for c in self.get_children():
+                c.move_by((x, y))
 
     def get_follow(self):
         return self.follow

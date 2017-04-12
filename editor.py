@@ -32,8 +32,10 @@ class Editor(object):
                             (font_size * 5, font_size + border),
                             font_size,
                             border)
+        i = 0
         for n in self.nodes:
-            self.menu.add_label(n)
+            self.menu.add_label('Node_{}'.format(i), n)
+            i += 1
         self.menu.open()
 
     def draw(self, window):

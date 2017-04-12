@@ -1,6 +1,6 @@
 import graphics
 import scene
-
+import ui
 
 def run():
     """ShmuPy
@@ -13,7 +13,19 @@ def run():
     graphics.images = graphics.image_loader.load_images("res/img/")
     # load root (player)
     level = scene.level.load('level0')
-
+    font_size = 24
+    border = 2
+    font_color = (230, 100, 1)
+    rect_color = (1, 100, 20)
+    highlight_color = (200,2,100)
+    health_menu = ui.menu.Menu(font_color, rect_color, highlight_color, (font_size*5, font_size+border),font_size, border)
+    health_menu.add_label('Player', 'Health:{:3}'.format(level.player.get_health()))
+    health_menu.open()
+    health_menu.toggle_sticky()
+    i = 0
+    for child in level.player.get_children():
+        health_menu.add_label('Helper_{}'.format(i), "")
+        i += 1
     # window keyboard callbacks
     def on_key_down(key):
         if key == ord('e'): ## DEBUGGING
@@ -59,14 +71,15 @@ def run():
         level.player.set_velocity((dx * level.player.get_speed()[0], dy * level.player.get_speed()[1]))
         level.draw(main_window)
         # draw ui stuff
-        graphics.render_font(main_window.display, 'Health:{:3}'.format(level.player.get_health()),
-                             graphics.font, graphics.font_color, (0, 0))
+        health_menu.get_label('Player').text = 'Health:{:3}'.format(level.player.get_health())
         i = 0
         for child in level.player.get_children():
             if child.is_alive() and not child.is_hidden():
-                graphics.render_font(main_window.display, 'Health:{:3}'.format(child.get_health()),
-                                     graphics.font_small, graphics.font_color, (0, 24*i+32))
-                i += 1
+                health_menu.get_label('Helper_{}'.format(i)).text = 'Health:{:3}'.format(child.get_health())
+            else:
+                health_menu.get_label('Helper_{}'.format(i)).text = 'Health:'
+            i += 1
+        health_menu.draw(main_window)
 
         if level.player.is_alive():
             # update velocity
