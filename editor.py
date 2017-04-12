@@ -26,23 +26,36 @@ class Editor(object):
         print "\nBullets", self.bullets
         border = 5
         font_size = 24
-        self.menu = ui.menu.Menu((200, 150, 250),
-                            (200, 20, 0),
-                            (170, 0, 240),
-                            (font_size * 5, font_size + border),
-                            font_size,
-                            border)
+        font_color = (200, 150, 250)
+        rect_color = (200, 20, 0)
+        highlight_color = (170, 0, 240)
+
+        self.menu = ui.menu.Menu(font_color,
+                                 rect_color,
+                                 highlight_color,
+                                  (font_size * 5, font_size + border),
+                                  font_size,
+                                  border)
+
+        self.menu.add_label('Enemy', 'Add Enemy')
+        self.menu.open()
+        self.node_menu =  ui.menu.Menu(font_color,
+                                       rect_color,
+                                       highlight_color,
+                                      (font_size * 5, font_size + border),
+                                      font_size,
+                                      border)
         i = 0
         for n in self.nodes:
-            self.menu.add_label('Node_{}'.format(i), n)
+            self.node_menu.add_label('Node_{}'.format(i), n)
             i += 1
-        self.menu.open()
 
     def draw(self, window):
         for e in self.level.get_enemies():
            e.set_translate(self.offset)
         self.level.draw(window)
         self.menu.draw(window)
+        self.node_menu.draw(window)
         if self.cursor_node:
             self.cursor_node.set_pos(window.get_mouse_pos())
             self.cursor_node.draw(window)
@@ -50,9 +63,18 @@ class Editor(object):
     def on_mouse_button_down(self, button):
         if button == graphics.BUTTON_LEFT:
             if self.menu.selected:
-                self.cursor_node = scene.node.load(self.menu.selected.text)
+                if self.menu.selected.text == 'Add Enemy':
+                    self.setting = ENEMY
+                self.node_menu.pos[0] = self.menu.pos[0]+self.menu.size[0]
+                self.node_menu.pos[1] = self.menu.selected.pos[1]
+                self.node_menu.open()
+                self.menu.toggle_sticky()
+            elif not self.node_menu.is_hidden and self.node_menu.selected:
+                self.cursor_node = scene.node.load(self.node_menu.selected.text)
                 for c in self.cursor_node.get_children():
                     c.hide()
+                self.menu.toggle_sticky()
+                self.node_menu.hide()
             elif self.cursor_node:
                 if self.setting == ENEMY:
                     node = deepcopy(self.cursor_node)
