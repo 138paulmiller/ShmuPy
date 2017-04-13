@@ -42,10 +42,14 @@ class Editor(object):
                                   font_size,
                                   border)
 
-        self.menu.add_label('Player', 'Add Player')
-        self.menu.add_label('Enemy', 'Add Enemy')
+        self.menu.add_label('Player', 'Add Player', self.on_menu_label_click)
+        self.menu.add_label('Enemy', 'Add Enemy', self.on_menu_label_click)
+        self.menu.add_label('Import', 'Import Level')
+        self.menu.add_label('Export', 'Export Level')
+
 
         self.menu.open()
+
         self.player_menu = ui.menu.Menu(font_color,
                                        rect_color,
                                        highlight_color,
@@ -54,7 +58,7 @@ class Editor(object):
                                       border)
         i = 0
         for n in self.players:
-            self.player_menu.add_label('Player_{}'.format(i), n)
+            self.player_menu.add_label('Player_{}'.format(i), n, self.on_player_menu_label_click)
             i += 1
         self.enemy_menu = ui.menu.Menu(font_color,
                                         rect_color,
@@ -64,7 +68,7 @@ class Editor(object):
                                         border)
         i = 0
         for n in self.enemies:
-            self.enemy_menu.add_label('Enemy_{}'.format(i), n)
+            self.enemy_menu.add_label('Enemy_{}'.format(i), n, self.on_enemy_menu_label_click)
             i += 1
 
     def draw(self, window):
@@ -80,47 +84,51 @@ class Editor(object):
             self.cursor_node.set_pos(window.get_mouse_pos())
             self.cursor_node.draw(window)
 
+    def on_menu_label_click(self, label):
+        self.enemy_menu.hide()
+        self.player_menu.hide()
+        print "click"
+        if label.text == 'Add Player':
+            self.setting = PLAYER
+            self.player_menu.pos[0] = self.menu.pos[0] + self.menu.size[0]
+            self.player_menu.pos[1] = label.pos[1]
+            self.player_menu.open()
+            #self.menu.toggle_sticky()
+
+        elif label.text == 'Add Enemy':
+            self.setting = ENEMY
+            self.enemy_menu.pos[0] = self.menu.pos[0] + self.menu.size[0]
+            self.enemy_menu.pos[1] = label.pos[1]
+            self.enemy_menu.open()
+            # self.menu.toggle_sticky()
+
+    def on_player_menu_label_click(self, label):
+        if self.setting == PLAYER:
+            node_parent_dir = 'players/'
+            self.cursor_node = scene.node_loader.load(node_parent_dir + label.text)
+            self.player_menu.hide()
+            for c in self.cursor_node.get_children():
+                c.hide()
+
+    def on_enemy_menu_label_click(self, label):
+        if self.setting == ENEMY:
+            node_parent_dir = 'enemies/'
+            self.cursor_node = scene.node_loader.load(node_parent_dir + label.text)
+            self.enemy_menu.hide()
+            for c in self.cursor_node.get_children():
+                c.hide()
+
     def on_mouse_button_down(self, button):
         if button == graphics.BUTTON_LEFT:
             # select from main menu
-
             if self.menu.selected:
-
-                    self.enemy_menu.hide()
-                    self.player_menu.hide()
-                    if self.menu.selected.text == 'Add Player':
-                        self.setting = PLAYER
-                        self.player_menu.pos[0] = self.menu.pos[0] + self.menu.size[0]
-                        self.player_menu.pos[1] = self.menu.selected.pos[1]
-                        self.player_menu.open()
-                        self.menu.toggle_sticky()
-
-                    elif self.menu.selected.text == 'Add Enemy':
-                        self.setting = ENEMY
-                        self.enemy_menu.pos[0] = self.menu.pos[0]+self.menu.size[0]
-                        self.enemy_menu.pos[1] = self.menu.selected.pos[1]
-                        self.enemy_menu.open()
-                        self.menu.toggle_sticky()
-                    # selected from player menu
+                self.menu.click()
+                # selected from player menu
             elif self.player_menu.selected:
-                    node_parent_dir = ''
-                    if self.setting == PLAYER:
-                        node_parent_dir = 'players/'
-                        self.cursor_node = scene.node_loader.load(node_parent_dir+self.player_menu.selected.text)
-                        self.player_menu.hide()
-                        for c in self.cursor_node.get_children():
-                            c.hide()
-                        self.menu.toggle_sticky()
+                self.player_menu.click()
             # selected from enemy menu
             elif self.enemy_menu.selected:
-                node_parent_dir = ''
-                if self.setting == ENEMY:
-                    node_parent_dir = 'enemies/'
-                    self.cursor_node = scene.node_loader.load(node_parent_dir+self.enemy_menu.selected.text)
-                    self.enemy_menu.hide()
-                    for c in self.cursor_node.get_children():
-                        c.hide()
-                    self.menu.toggle_sticky()
+                self.enemy_menu.click()
             elif self.cursor_node:
                 self.enemy_menu.hide()
                 self.player_menu.hide()

@@ -13,12 +13,8 @@ class Menu(object):
         self.is_hidden = True
         self.border = border
         self.font_size = font_size
-        self.on_click = None
         self.selected = None
         self.sticky = False   # highlight selected
-
-    def set_on_click(self, on_click_callback):
-        self.on_click = on_click_callback
 
     def open(self):
         self.is_hidden = False
@@ -36,16 +32,21 @@ class Menu(object):
         self.pos[0] = x
         self.pos[1]= y
 
-    def add_label(self, id, text):
+    def click(self):
+        if self.selected and self.selected.on_click:
+            self.selected.on_click(self.selected)
+
+    def add_label(self, id, text, click_callback=None):
         offset_y = len(self.labels)*self.size[1]
-        print len(self.labels)
-        self.labels[id]= ui.label.Label(text,
-                                          (self.pos[0], self.pos[1]+offset_y),
-                                          self.size,
-                                          self.font_size,
-                                          self.border,
-                                          self.font_color,
-                                          self.rect_color)
+        label = ui.label.Label(text,
+                              (self.pos[0], self.pos[1]+offset_y),
+                              self.size,
+                              self.font_size,
+                              self.border,
+                              self.font_color,
+                              self.rect_color)
+        label.set_on_click(click_callback)
+        self.labels[id] = label
 
     def get_label(self, id):
         if id in self.labels:
