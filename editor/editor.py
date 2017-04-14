@@ -17,14 +17,13 @@ class Editor(object):
     def __init__(self):
         self.setting = None
         self.offset = [0, 0]     # control with arrow keys
-        self.level = scene.level.Level()
+        self.level = scene.level_loader.load('level0')
         self.level.set_pause(True)
         self.cursor_node = None
         self.players = load_file_names('res/nodes/players')
+
         self.enemies = load_file_names('res/nodes/enemies')
-
         self.bullets = load_file_names('res/bullets')
-
         print "\nPlayers : ", self.players
 
         print "\nEnemies : ", self.enemies
@@ -46,7 +45,6 @@ class Editor(object):
         self.menu.add_label('Enemy', 'Add Enemy', self.on_menu_label_click)
         self.menu.add_label('Import', 'Import Level')
         self.menu.add_label('Export', 'Export Level')
-
 
         self.menu.open()
 

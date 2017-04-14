@@ -85,7 +85,6 @@ def load(node_file):
                         parent_dir = ''
                         if path.rfind(bs) >= 0:
                             parent_dir = path[path.rfind(bs):]
-                        print parent_dir
                         child = load('{}/{}.node'.format(parent_dir, child_data['file_id'].lower()))
                         child.set_id(child_id)
                         node.add_child(child)

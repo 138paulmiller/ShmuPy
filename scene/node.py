@@ -146,6 +146,15 @@ class Node(graphics.sprite.Sprite):
                 if not child.is_hidden():
                     child.shoot()
 
+    def set_translate(self, (x, y)):
+        super(Node, self).set_translate((x,y))
+        for c in self.get_children():
+            c.set_translate((x,y))
+
+        if self.get_bullet_system():
+            for b in self.get_bullet_system().get_bullets():
+                b.set_translate((x,y))
+
     def get_bullets(self):
         if self.bullet_system:
             return self.bullet_system.get_bullets()

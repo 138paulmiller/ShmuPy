@@ -12,7 +12,7 @@ def run():
     # load all images used
     graphics.images = graphics.image_loader.load_images("res/img/")
     # load root (player)
-    level = scene.level.load('level0')
+    level = scene.level_loader.load('level0')
     font_size = 24
     border = 2
     font_color = (230, 100, 1)

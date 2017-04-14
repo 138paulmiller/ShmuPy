@@ -59,7 +59,6 @@ def load(bullet_file):
         data = json.loads(file.read())
         if 'id' in data:
             bullet = scene.node.Node(data['id'].lower())
-            print bullet.get_velocity(), "LOADING"
             if 'width' in data and 'height' in data:
                 bullet.set_size((data['width'], data['height']))
                 # parse animations

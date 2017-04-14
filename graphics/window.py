@@ -37,7 +37,6 @@ class Window(object):
         if button_id < len(self.mouse_button_states):
             return self.mouse_button_states[button_id]
 
-
     def get_mouse_pos(self):
         return self.mouse_pos
 
