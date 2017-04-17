@@ -1,6 +1,7 @@
 from copy import deepcopy
 import scene
 import graphics
+import json
 import ui
 import os
     # TODO add node img for starting pos
@@ -17,7 +18,10 @@ class Editor(object):
     def __init__(self):
         self.setting = None
         self.offset = [0, 0]     # control with arrow keys
-        self.level = scene.level_loader.load('level0')
+        self.level = scene.level_loader.load('levelOut')
+        if not self.level:
+            self.level = scene.level.Level()
+            self.level.set_scroll(scene.level.TOPDOWN)
         self.level.set_pause(True)
         self.cursor_node = None
         self.players = load_file_names('res/nodes/players')
@@ -42,9 +46,9 @@ class Editor(object):
                                   border)
 
         self.menu.add_label('Player', 'Add Player', self.on_menu_label_click)
-        self.menu.add_label('Enemy', 'Add Enemy', self.on_menu_label_click)
-        self.menu.add_label('Import', 'Import Level')
-        self.menu.add_label('Export', 'Export Level')
+        self.menu.add_label('Enemy', 'Add Enemy',   self.on_menu_label_click)
+        self.menu.add_label('Import', 'Import Level',  self.on_menu_label_click)
+        self.menu.add_label('Export', 'Export Level',  self.on_menu_label_click)
 
         self.menu.open()
 
@@ -99,6 +103,12 @@ class Editor(object):
             self.enemy_menu.pos[1] = label.pos[1]
             self.enemy_menu.open()
             # self.menu.toggle_sticky()
+        elif label.text == 'Import Level':
+            return
+
+        elif label.text == 'Export Level':
+            print 'Exporting Level'
+            self.export()
 
     def on_player_menu_label_click(self, label):
         if self.setting == PLAYER:
@@ -147,9 +157,29 @@ class Editor(object):
         if key == ord(' '):
             print "Toggle Pause"
             self.level.set_pause(not self.level.pause)
-        elif key == ord('e'):
-            self.setting = ENEMY
-        print "Key Down ", key, " Setting - ", self.setting
+
+    def export(self):
+        # exports level to json file
+        data = {}
+        print self.level.scroll
+        data['id']='levelOut'
+        data['player'] = self.level.get_player().get_id()
+        data['startx']=self.level.get_player().get_pos()[0]
+        data['starty']=self.level.get_player().get_pos()[1]
+        data['scroll']=self.level.scroll
+
+        data['enemies'] = []
+        for e in self.level.get_enemies():
+            e_data = {}
+            e_data['id']=e.get_id()
+            e_data['x']=e.get_pos()[0]
+            e_data['y'] = e.get_pos()[1]
+
+            data['enemies'].append(e_data)
+        with open(os.path.realpath('res/levels/levelOut.level'), 'w') as outfile:
+            json.dump(data, outfile)
+        outfile.close()
+
 
 
 def load_file_names(dir_path):

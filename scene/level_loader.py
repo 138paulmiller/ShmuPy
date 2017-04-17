@@ -9,7 +9,10 @@ def load(level_file):
     node_file = os.path.realpath('res/levels/{}.level'.format(level_file))
     # print "Loading:", node_file
     with open(node_file) as file:
-        data = json.loads(file.read())
+        s = file.read()
+        if not s:
+            return None
+        data = json.loads(s)
         l = level.Level()
         if 'scroll' in data:
             l.scroll = data['scroll'].lower()

@@ -23,6 +23,9 @@ class Level(object):
     def set_scroll(self, scroll):
         self.scroll =scroll
 
+    def get_scroll(self):
+        return self.scroll
+
     def set_boss(self, boss):
         self.boss = boss
 
