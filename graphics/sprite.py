@@ -82,7 +82,8 @@ class Sprite(object):
         self.move_by(self.velocity)
         if self.current_animation:
             if self.animations[self.current_animation].is_done():
-                self.set_animation(self.prev_animation)
+                if self.current_animation != 'death' and self.prev_animation:
+                    self.set_animation(self.prev_animation)
             else:
                 self.animations[self.current_animation].update()
 

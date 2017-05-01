@@ -1,0 +1,27 @@
+{
+	"id":"asteroid",
+	"width": 25,
+	"height": 25,
+	"health": 100,
+	"xspeed": 2,
+	"yspeed": 2,
+	"xvelocity":0,
+	"yvelocity":2,
+    "default":"idle",
+    "bound":"false",
+    "collide":"True",
+    "damage":10,
+	"animation":
+	[{
+		"id": "idle",
+		"images": ["asteroid_0.png"],
+		"speed": 0.01,
+		"loop": "Fasle"
+	},
+	{
+		"id": "death",
+		"images": ["asteroid_4.png","asteroid_5.png", "asteroid_6.png" ],
+		"speed": 0.4,
+		"loop": "False"
+	}]
+}

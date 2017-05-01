@@ -102,7 +102,6 @@ def load(bullet_file):
                 if 'yspeed' in data:
                     speed[1] = data['yspeed']
                 bullet.set_speed(speed)
-
                 bullet.is_bullet = True
                 bullet_system.source_bullet = bullet
                 if 'rate' in data:

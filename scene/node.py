@@ -164,6 +164,7 @@ class Node(graphics.sprite.Sprite):
         super(Node, self).update()
         if self.bullet_system:
             self.bullet_system.update()
+
         for child in self.get_children():
             dx = 0
             dy = 0
@@ -201,17 +202,13 @@ def is_collision_rect(node_rect, other_rect):
     return collide
 
 
-
-
 def handle_collision(node, other):
     # handles node collisions by applying damage to node and or other
     # and making callback on collision between two nodes
-
     if node.is_alive() and other.is_alive():
         if node.is_collidable() and not node.is_hidden() and other.is_collidable() and not other.is_hidden():
             # if collision between node and other
             if scene.node.is_collision(node, other):
-                print node.get_id(),":",other.get_health(), "--", other.get_id(),":", other.get_health()
                 # take damage to both nodes
                 node.health -= other.damage
                 other.health -= node.damage

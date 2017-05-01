@@ -7,19 +7,19 @@
 	"yspeed": 2,
     "xflip": 0,
 	"yflip": 0,
-    "default":"pieret_idle",
+    "default":"idle",
     "bullet_system":"helper",
     "duplicate":"true",
     "collide":"true",
 	"animation":
 	[{
-		"id": "pieret_idle",
+		"id": "idle",
 		"images": ["pieret_0.png", "pieret_1.png"],
 		"speed": 0.15,
 		"loop": "True"
 	},
 	{
-		"id": "pieret_damage",
+		"id": "damage",
 		"images": ["pieret_1.png", "pieret_2.png"],
 		"speed": 0.15,
 		"loop": "False"

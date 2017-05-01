@@ -7,13 +7,13 @@
 	"yspeed": 3,
 	"xvelocity":0,
 	"yvelocity":3,
-    "default":"lil_idle",
+    "default":"idle",
     "bound":"false",
     "collide":"True",
     "damage":10,
 	"animation":
 	[{
-		"id": "lil_idle",
+		"id": "idle",
 		"images": ["skull_0.png", "skull_1.png"],
 		"speed": 0.15,
 		"loop": "True"

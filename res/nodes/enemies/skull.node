@@ -7,14 +7,14 @@
 	"yspeed": 3,
 	"xvelocity":0,
 	"yvelocity":3,
-    "default":"skull_idle",
+    "default":"idle",
     "bullet_system":"enemy",
     "bound":"false",
     "collide":"True",
     "damage":10,
 	"animation":
 	[{
-		"id": "skull_idle",
+		"id": "idle",
 		"images": ["skull_0.png", "skull_1.png"],
 		"speed": 0.15,
 		"loop": "True"

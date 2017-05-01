@@ -1,4 +1,5 @@
 import scene
+import random
 
 TOPDOWN = 'topdown'
 SIDESCROLL = 'sidescroll'
@@ -45,11 +46,14 @@ class Level(object):
                     e.show()
                     if y + e.get_size()[1] > 0:
                         if self.player:
-                            if e.is_alive() and abs(e.get_pos()[0]  - self.player.get_pos()[0]) < 15:
-                                e.shoot()
+                            if e.is_alive() and abs(e.get_pos()[0]  - self.player.get_pos()[0]) < 12:
+                                if random.randint(0, 3) == 0:
+                                    e.shoot()
                             scene.node.handle_collision(self.player, e)
                 else:
                     remove.append(e)
+            else:
+                e.show()
             e.draw(window)
         for r in remove:
             if r in self.enemies:

@@ -22,6 +22,7 @@ class Editor(object):
         if not self.level:
             self.level = scene.level.Level()
             self.level.set_scroll(scene.level.TOPDOWN)
+
         self.level.set_pause(True)
         self.cursor_node = None
         self.players = load_file_names('res/nodes/players')

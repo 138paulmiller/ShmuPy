@@ -27,6 +27,15 @@ class Animation(object):
         self.pause = False
         self.done = False
 
+    def next_frame(self):
+        self.current_i += 1
+        if self.loop:
+            self.current_i %= len(self.sequence)
+        elif self.current_i >= len(self.sequence):
+            self.done = True
+            self.current_i = 0
+
+
     def stop(self):
         self.pause = True
         self.done = True
@@ -47,12 +56,7 @@ class Animation(object):
             self.step += self.speed
             if self.step > 1:
                 self.step = 0
-                self.current_i += 1
-                if self.loop:
-                    self.current_i %= len(self.sequence)
-                elif self.current_i >= len(self.sequence):
-                    self.done = True
-                    self.current_i = 0
+                self.next_frame()
 
     def draw(self, display, (pos, size), flip=(0, 0), translate=(0,0)):
         img_i = self.sequence[self.current_i]

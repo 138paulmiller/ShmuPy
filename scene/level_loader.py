@@ -60,14 +60,16 @@ def load(level_file):
                         pos[1] = enemy_data['y']
                     enemy.set_pos(pos)
                     vel = [0, 0]
-                    bullet = enemy.get_bullet_system().bullet()
+                    if enemy.get_bullet_system():
+                        bullet = enemy.get_bullet_system().bullet()
                     if l.scroll == level.SIDESCROLL:
                         vel[0] = -enemy.get_speed()[0]
-                        bullet.set_velocity((-bullet.get_speed()[0], 0))
+                        if bullet:
+                            bullet.set_velocity((-bullet.get_speed()[0], 0))
                     elif l.scroll == level.TOPDOWN:
                         vel[1] = enemy.get_speed()[1]
-                        bullet.set_velocity((0, bullet.get_speed()[1]))
-                    print "VELOCITY", l.scroll
+                        if bullet:
+                            bullet.set_velocity((0, bullet.get_speed()[1]))
                     enemy.set_velocity(vel)
                     l.add_enemy(enemy)
                 else:
