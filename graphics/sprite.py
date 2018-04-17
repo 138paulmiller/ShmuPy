@@ -35,7 +35,7 @@ class Sprite(object):
         sprite.speed = deepcopy(self.speed)
         sprite.on_update = self.on_update
         sprite.on_draw = self.on_draw
-        for key in self.animations.iterkeys():
+        for key in self.animations.keys():
             sprite.animations[key] = deepcopy(self.animations[key])
         sprite.current_animation = self.current_animation # id to current animation
         sprite.set_animation(sprite.current_animation)
@@ -113,11 +113,14 @@ class Sprite(object):
             animation = self.animations[self.current_animation]
             animation.start()  # start new
 
-    def move_by(self, (x, y)):
+    def move_by(self, pos):
+        x,y = pos
         self.pos[0] += x
         self.pos[1] += y
 
-    def accelerate_by(self, (x, y)):
+    def accelerate_by(self, pos):
+        x,y = pos
+        
         if abs(self.velocity[0]+x):
             self.velocity[0] += x
         if abs(self.velocity[1]+y):
@@ -126,25 +129,33 @@ class Sprite(object):
     def get_velocity(self):
         return self.velocity
 
-    def set_velocity(self, (x, y)):
+    def set_velocity(self, pos):
+        x,y = pos
+        
         self.velocity[0] = x
         self.velocity[1] = y
 
     def get_pos(self):
         return self.pos
 
-    def set_pos(self, (x, y)):
+    def set_pos(self, pos):
+        x,y = pos
+        
         self.pos[0] = x
         self.pos[1] = y
 
-    def set_translate(self, (x, y)):
+    def set_translate(self, pos):
+        x,y = pos
+        
         self.translate[0] = x
         self.translate[1] = y
 
     def get_size(self):
         return self.size
 
-    def set_size(self, (w, h)):
+    def set_size(self, size):
+        w,h = size
+        
         if w > 0 and h > 0:
             self.size[0] = w
             self.size[1] = h
@@ -158,23 +169,23 @@ class Sprite(object):
     def get_speed(self):
         return self.speed
 
-    def set_speed(self, (x, y)):
-        self.speed[0] = x
-        self.speed[1] = y
+    def set_speed(self, speed):
+        self.speed[0] = speed[0]
+        self.speed[1] = speed[1]
 
     def get_speed(self):
         return self.speed
 
-    def set_flip(self, (x, y)):
-        self.flip[0] = x
-        self.flip[1] = y
+    def set_flip(self, flip):
+        self.flip[0] = flip[0]
+        self.flip[1] = flip[1]
 
     def get_flip(self):
         return self.flip
 
-    def set_rect(self, (pos, size)):
-        self.pos = pos
-        self.size = size
+    def set_rect(self, rect):
+        self.pos = rect[0]
+        self.size = rect[1]
 
     def get_rect(self):
         return self.pos, self.size
@@ -197,9 +208,11 @@ class Sprite(object):
     def show(self):
         self.hidden = False
 
-    def is_within(self, (x,y,w,h)):
+    def is_within(self, rect):
+        x,y,w,h = rect
         pos = self.get_pos()
         size = self.get_size()
         if pos[0]+size[0] > x and pos[0] < x + w:
             if pos[1] + size[1] > y and pos[1] < y + h:
                 return True
+

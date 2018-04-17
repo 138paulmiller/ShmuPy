@@ -81,7 +81,7 @@ def load(bullet_file):
                     if 'default' in data:
                         bullet.set_animation(data['default'].lower())
                     else:
-                        print bullet.get_id(), ":Missing Default Animation!!!"
+                        print(bullet.get_id(), ":Missing Default Animation!!!")
                 if 'bound' in data:
                     bullet.set_is_bound(data['bound'].lower() in ('true', '1', 'yes'))
                 if 'collide' in data:
@@ -109,8 +109,8 @@ def load(bullet_file):
                 if 'max' in data:
                     bullet_system.max = data['max']
             else:
-                print bullet.get_id(), ":Missing size(x and y)!!!"
+                print(bullet.get_id(), ":Missing size(x and y)!!!")
         else:
-            print ":Missing ID!!!"
+            print(":Missing ID!!!")
 
     return bullet_system

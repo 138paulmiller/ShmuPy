@@ -1,7 +1,7 @@
-import level
 import scene
 import json
 import os
+from scene import level 
 
 
 def load(level_file):
@@ -73,6 +73,6 @@ def load(level_file):
                     enemy.set_velocity(vel)
                     l.add_enemy(enemy)
                 else:
-                    print level_file, ":Enemy ID Missing"
+                    print(level_file, ":Enemy ID Missing")
     return l
 

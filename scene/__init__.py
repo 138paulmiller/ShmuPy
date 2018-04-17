@@ -1,12 +1,12 @@
-import bullet_system
-import node
-import node_loader
-import level
-import level_loader
+from scene import bullet_system
+from scene import node
+from scene import node_loader
+from scene import level
+from scene import level_loader
 
 
 def on_player_collision(node, other):
-    print"Player:", node.get_health()
+    print("Player:", node.get_health())
     node.set_animation("damage")
 
 

@@ -1,5 +1,5 @@
-import scene
 import random
+import scene
 
 TOPDOWN = 'topdown'
 SIDESCROLL = 'sidescroll'

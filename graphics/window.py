@@ -2,7 +2,6 @@ import sys
 import pygame
 import graphics
 
-
 class Window(object):
     """
     Window:
@@ -76,7 +75,7 @@ class Window(object):
                 if self.on_key_up:
                     self.on_key_up(key)
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                print event.button
+                print(event.button)
                 self.mouse_button_states[event.button - 1] = True
                 if self.on_mouse_button_down:
                     self.on_mouse_button_down(event.button - 1)

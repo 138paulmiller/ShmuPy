@@ -22,11 +22,11 @@ def load(node_file):
         if 'id' in data:
             node = scene.node.Node(data['id'].lower())
         else:
-            print node.get_id(), ":Missing ID!!!"
+            print(node.get_id(), ":Missing ID!!!")
         if 'width' in data and 'height' in data:
             node.set_size((data['width'], data['height']))
         else:
-            print node.get_id(), ":Missing size(x and y)!!!"
+            print(node.get_id(), ":Missing size(x and y)!!!")
         if 'x' in data and 'y' in data:
             node.set_pos((data['x'], data['y']))
         if 'xspeed' in data:
@@ -69,10 +69,10 @@ def load(node_file):
             if 'default' in data:
                 node.set_animation(data['default'].lower())
             else:
-                print node.get_id(), ":Missing Default Animation!!!"
+                print(node.get_id(), ":Missing Default Animation!!!")
 
         else:
-            print node.get_id(),":Missing Animation!!!"
+            print (node.get_id(),":Missing Animation!!!")
         if 'children' in data:
             for child_data in data['children']:
                 if 'id' in child_data:
@@ -96,6 +96,6 @@ def load(node_file):
                                 follow_dist = child_data['follow_dist']
                             child.set_follow_dist((follow_dist[0], follow_dist[1]))
                 else:
-                    print node.get_id(), ":Child Missing Id!!!"
+                    print(node.get_id(), ":Child Missing Id!!!")
 
     return node

@@ -1,8 +1,8 @@
-import image_loader
-import pygame
-import sprite
-import animation
-import window
+import pygame, os
+from graphics import sprite
+from graphics import animation
+from graphics import ui
+from graphics import window
 """
 Graphics
     Package to simplify rendering
@@ -36,12 +36,12 @@ Graphics Utility Functions
     Used by the other modules in package to simplify rendering
 """
 
-def get_display((width, height)):
+def get_display(dimen):
     """
     return:
         instance of a pygame display
     """
-    return pygame.display.set_mode((width, height))
+    return pygame.display.set_mode(dimen)
 
 
 def update():
@@ -55,7 +55,7 @@ def render_font(display, text, font, color, pos):
     display.blit(font.render(text, 1, color), pos)
 
 
-def render_rect(display, ((x, y), (w, h)), (r, g, b), (xoff, yoff)):
+def render_rect(display, rect, color, offset):
     """
     :param display:
         display to render rect onto
@@ -66,10 +66,14 @@ def render_rect(display, ((x, y), (w, h)), (r, g, b), (xoff, yoff)):
    :param (r,g,b):
       color of rectangle
     """
+    x,y = rect[0]
+    w,h = rect[1]
+    xoff, yoff = offset 
+    r,g,b = color
     pygame.draw.rect(display, (r, g, b), ((x+xoff, y+yoff), (w, h)), 0)
 
 
-def render_img(display, image, ((x, y), (w, h)), (xoff, yoff)):
+def render_img(display, image, rect, offset):
     """
     :param display:
         display to render image onto
@@ -82,10 +86,13 @@ def render_img(display, image, ((x, y), (w, h)), (xoff, yoff)):
      :param (xoff, yoff):
         offset of translation of image on display (0,0) is top-left corner
     """
+    x,y = rect[0]
+    w,h = rect[1]
+    xoff, yoff = offset 
     display.blit(pygame.transform.scale(image, (w, h)), (x+xoff, y+yoff))
 
 
-def flip_image(image, (x, y)):
+def flip_image(image, pos):
     """
     :param image:
         source image to flip
@@ -94,5 +101,23 @@ def flip_image(image, (x, y)):
     :return:
         flipped image
     """
+    x,y = pos
     return pygame.transform.flip(image, x, y)
 
+
+
+
+
+def load_image_file(img_file):
+    return pygame.image.load(os.path.realpath(img_file)).convert_alpha()
+
+
+def load_images(root_dir):
+    images = {}
+    if root_dir:
+        for dir_name, subdir_list, file_list in os.walk(os.path.realpath(root_dir),topdown=False):  # do not travers . and ..
+            for subdir in subdir_list:
+                images.update(load_images(subdir))
+            for file_name in file_list:
+                images[file_name] = load_image_file('{}/{}'.format(dir_name, file_name))
+    return images

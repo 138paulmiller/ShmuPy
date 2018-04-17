@@ -1,6 +1,5 @@
-import graphics
 import pdb
-
+import graphics
 
 class Animation(object):
     def __init__(self, images=[], sequence=[], speed=0, loop=True):
@@ -58,9 +57,10 @@ class Animation(object):
                 self.step = 0
                 self.next_frame()
 
-    def draw(self, display, (pos, size), flip=(0, 0), translate=(0,0)):
+    def draw(self, display, rect, flip=(0, 0), translate=(0,0)):
+        pos, size = rect
         img_i = self.sequence[self.current_i]
         if img_i < len(self.images):
             img = graphics.flip_image(self.images[img_i], flip)
-            graphics.render_img(display, img, (pos, size),translate)
+            graphics.render_img(display, img, [pos, size], translate)
 

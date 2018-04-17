@@ -1,6 +1,5 @@
 import graphics
 import scene
-import ui
 
 def run():
     """ShmuPy
@@ -10,7 +9,7 @@ def run():
     main_window = graphics.window.Window(580, 720)
     # load all images from img
     # load all images used
-    graphics.images = graphics.image_loader.load_images("res/img/")
+    graphics.images = graphics.load_images("res/img/")
     # load root (player)
     level = scene.level_loader.load('levelOut')
     if not level:
@@ -20,7 +19,7 @@ def run():
     font_color = (230, 100, 1)
     rect_color = (1, 100, 20)
     highlight_color = (200,2,100)
-    health_menu = ui.menu.Menu(font_color, rect_color, highlight_color, (font_size*5, font_size+border),font_size, border)
+    health_menu = graphics.ui.Menu(font_color, rect_color, highlight_color, (font_size*5, font_size+border),font_size, border)
     health_menu.add_label('Player', 'Health:{:3}'.format(level.player.get_health()))
     health_menu.open()
     health_menu.toggle_sticky()

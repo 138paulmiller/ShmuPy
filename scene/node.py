@@ -43,14 +43,14 @@ class Node(graphics.sprite.Sprite):
         node.speed = sprite.speed
         node.on_update = sprite.on_update
         node.on_draw = sprite.on_draw
-        for key in self.animations.iterkeys():
+        for key in self.animations.keys():
             node.animations[key] = deepcopy(sprite.animations[key])
         node.current_animation = sprite.current_animation  # id to current animation
         node.set_animation(sprite.current_animation)
         node.prev_animation = sprite.prev_animation  # id to prev animation
         node.is_bound = sprite.is_bound
         node.parent = self.parent
-        for key in self.children.iterkeys():
+        for key in self.children.keys():
             node.children[key] = self.children[key]
         node.is_duplicate = self.is_duplicate
         node.follow = self.follow
@@ -91,7 +91,7 @@ class Node(graphics.sprite.Sprite):
                 node.set_parent(self)
                 self.children[node.get_id()] = node
             else:
-                print "Node: ", node.get_id(), " already exists"
+                print ("Node: ", node.get_id(), " already exists")
 
     def get_child(self, node_id):
         """
@@ -125,16 +125,19 @@ class Node(graphics.sprite.Sprite):
     def set_follow(self, follow):
         self.follow = follow
 
-    def move_by(self, (x, y)):
-        super(Node, self).move_by((x, y))
+    def move_by(self, pos):
+        super(Node, self).move_by((pos[0], pos[1]))
+        x,y = pos
         if self.follow:
+        
             for c in self.get_children():
                 c.move_by((x, y))
 
     def get_follow(self):
         return self.follow
 
-    def set_follow_dist(self, (dx, dy)):
+    def set_follow_dist(self, deltas):
+        dx, dy = deltas
         self.follow_dist[0] = dx
         self.follow_dist[1] = dy
 
@@ -146,8 +149,9 @@ class Node(graphics.sprite.Sprite):
                 if not child.is_hidden():
                     child.shoot()
 
-    def set_translate(self, (x, y)):
+    def set_translate(self, pos):
         super(Node, self).set_translate((x,y))
+        x, y = pos
         for c in self.get_children():
             c.set_translate((x,y))
 
